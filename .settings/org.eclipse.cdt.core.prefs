@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.toolchain.gnu.base.2035635971/PATH/delimiter=\:
+environment/project/cdt.managedbuild.toolchain.gnu.base.2035635971/PATH/operation=replace
+environment/project/cdt.managedbuild.toolchain.gnu.base.2035635971/PATH/value=/home/zf/tools/gcc-4.9.1/gcc/bin/\:/usr/bin\:\:/usr/lib64/qt-3.3/bin\:/usr/local/sbin\:/usr/local/bin\:/sbin\:/bin\:/usr/sbin\:/usr/bin\:/root/bin\:/home/zf/tools/gcc-4.9.1/gcc/bin/\:$PATH
+environment/project/cdt.managedbuild.toolchain.gnu.base.2035635971/append=true
+environment/project/cdt.managedbuild.toolchain.gnu.base.2035635971/appendContributed=true

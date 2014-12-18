@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../lib/libtestcommon.a  CMakeFiles/testcommon.dir/InitException.cpp.o CMakeFiles/testcommon.dir/TestConfig.cpp.o CMakeFiles/testcommon.dir/TestAppInterface.cpp.o
+/usr/bin/ranlib ../../lib/libtestcommon.a

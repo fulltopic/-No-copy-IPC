@@ -1,0 +1,1 @@
+g++   -std=c++0x -ggdb -fsigned-char -freg-struct-return -fPIC -Wall -W -Wshadow -Wpointer-arith -Wcast-qual -Winline -DGNUPC    CMakeFiles/test_rcvcntnn.dir/TestRcvCnt.cpp.o  -o ../../bin/test_rcvcntnn -rdynamic -lrt ../../lib/libtest_4.so ../../lib/libtestcommon.a -lrt -lpthread -Wl,-rpath,/home/zf/workspace_cpp/test_5/lib 

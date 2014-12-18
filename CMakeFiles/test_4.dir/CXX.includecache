@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/zf/workspace_cpp/test_5/GlobalConfig.cpp
+GlobalConfig.h
+/home/zf/workspace_cpp/test_5/GlobalConfig.h
+
+/home/zf/workspace_cpp/test_5/GlobalConfig.h
+climits
+-
+sys/types.h
+-
+stdint.h
+-
+
