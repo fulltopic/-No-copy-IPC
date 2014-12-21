@@ -11,6 +11,8 @@ LocalFreeList.h
 /home/zf/workspace_cpp/test_5/freelist/LocalFreeList.h
 MemStorage.h
 /home/zf/workspace_cpp/test_5/freelist/MemStorage.h
+CrashPoints.h
+/home/zf/workspace_cpp/test_5/freelist/CrashPoints.h
 iostream
 -
 string
@@ -21,6 +23,16 @@ Cell.h
 /home/zf/workspace_cpp/test_5/freelist/Cell.h
 GlobalConfig.h
 /home/zf/workspace_cpp/test_5/freelist/GlobalConfig.h
+
+CrashPoints.h
+atomic
+-
+stdlib.h
+-
+string
+-
+ShmStore.h
+-
 
 GlobalConfig.h
 climits
@@ -54,6 +66,8 @@ cstdatomic
 atomic
 -
 climits
+-
+vector
 -
 
 freelist/SimpleFreeList.h

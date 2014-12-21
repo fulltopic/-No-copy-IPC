@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/test_4.dir/GlobalConfig.cpp.o"
+  "CMakeFiles/test_4.dir/CrashPoints.cpp.o"
   "lib/libtest_4.pdb"
   "lib/libtest_4.so"
 )

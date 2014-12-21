@@ -40,6 +40,7 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   INCLUDE("/home/zf/workspace_cpp/test_5/test/counterN21/cmake_install.cmake")
   INCLUDE("/home/zf/workspace_cpp/test_5/test/counter12N/cmake_install.cmake")
   INCLUDE("/home/zf/workspace_cpp/test_5/test/counterN2N/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test_5/test/monitortest/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

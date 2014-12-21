@@ -30,3 +30,5 @@ add_subdirectory(basic)
 add_subdirectory(counterN21)
 add_subdirectory(counter12N)
 add_subdirectory(counterN2N)
+
+add_subdirectory(monitortest)

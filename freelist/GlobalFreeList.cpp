@@ -17,6 +17,8 @@
 #include "MemStorage.h"
 
 
+using namespace std;
+
 __thread uint GlobalFreeList::userId(0);
 //Another solution is make global free list a stack
 //Then monitor could work exclusively
@@ -39,7 +41,6 @@ bool GlobalFreeList::init()
 //	int cellIndex = 0;
 	for(int i = 0; i < GLOBALBLOCKSIZE; i ++)
 	{
-//		freeList[i] = cellIndex ++;
 		freeList[i] = i * BLOCKSIZE;
 //		cout << "freeList[" << i << "] = " << freeList[i] << endl;
 	}
@@ -304,4 +305,154 @@ bool GlobalFreeList::containsInDetail(const int cellId)
 	}
 
 	return false;
+}
+
+bool GlobalFreeList::checkList4Dup(vector<bool>& checkList)
+{
+	Cell *cells = MemStorage::GetInstance().getCells();
+
+	for(int i = 0; i < GLOBALFREELISTSIZE; i ++)
+	{
+		if(GlobalConfig::IsEmptySlot(freeList[i]))
+		{
+			continue;
+		}else
+		{
+			int cellIndex = freeList[i] & DATAMASK;
+			if(checkList[cellIndex])
+			{
+				cout << "Repeated in " << cellIndex << endl;
+				return false;
+			}else
+			{
+				checkList[cellIndex] =  true;
+				for(int j = 0; j < SIBLINGSIZE; j ++)
+				{
+					int otherCellId = cells[cellIndex].siblings[j];
+					if(otherCellId == INVALIDCELL)
+					{
+						break;
+					}else
+					{
+						if(checkList[otherCellId])
+						{
+							cout << "Duplicated in " << otherCellId << endl;
+							return false;
+						}else
+						{
+							checkList[otherCellId] = true;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	return true;
+}
+
+bool GlobalFreeList::checkList4Miss(vector<bool>& checkList)
+{
+	Cell *cells = MemStorage::GetInstance().getCells();
+
+	for(int i = 0; i < GLOBALFREELISTSIZE; i ++)
+	{
+		if(GlobalConfig::IsEmptySlot(freeList[i]))
+		{
+			continue;
+		}else
+		{
+			int cellIndex = freeList[i] & DATAMASK;
+			checkList[cellIndex] = true;
+
+			for(int j = 0; j < SIBLINGSIZE; j ++)
+			{
+				int otherCellId = cells[cellIndex].siblings[j];
+				if(otherCellId == INVALIDCELL)
+				{
+					break;
+				}else
+				{
+					checkList[otherCellId] = true;
+				}
+			}
+		}
+	}
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		if(!checkList[i])
+		{
+			cout << i << "Missed" << endl;
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool GlobalFreeList::checkNoDupInList()
+{
+	vector<bool> checkList(TOTALBLOCKSIZE);
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		checkList[i] = false;
+	}
+
+	return checkList4Dup(checkList);
+}
+
+bool GlobalFreeList::checkNoMissInList()
+{
+	vector<bool> checkList(TOTALBLOCKSIZE);
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		checkList[i] = false;
+	}
+
+	return checkList4Miss(checkList);
+}
+
+bool GlobalFreeList::checkNoDup()
+{
+	vector<bool> checkList(TOTALBLOCKSIZE);
+	Cell *cells = MemStorage::GetInstance().getCells();
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		checkList[i] = false;
+	}
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		if(!GlobalConfig::IsFreeTid(cells[i].myTid))
+		{
+			checkList[i] = true;
+		}
+	}
+
+	return checkList4Dup(checkList);
+}
+
+bool GlobalFreeList::checkNoMiss()
+{
+	vector<bool> checkList(TOTALBLOCKSIZE);
+
+	Cell *cells = MemStorage::GetInstance().getCells();
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		checkList[i] = false;
+	}
+
+	for(int i = 0; i < TOTALBLOCKSIZE; i ++)
+	{
+		if(!GlobalConfig::IsFreeTid(cells[i].myTid))
+		{
+			checkList[i] = true;
+		}
+	}
+
+	return checkList4Miss(checkList);
 }

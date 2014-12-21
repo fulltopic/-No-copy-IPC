@@ -21,6 +21,7 @@ freelist/CMakeFiles/freelist.dir/GlobalFreeList.cpp.o
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o
  /home/zf/workspace_cpp/test_5/freelist/LocalFreeList.cpp
  /home/zf/workspace_cpp/test_5/freelist/LocalFreeList.h
+ CrashPoints.h
  GlobalConfig.h
  comm/CmmQueue.h
  freelist/CellBlock.h

@@ -82,6 +82,7 @@ uint MemStorage::getNewTid()
 	return newTid;
 }
 
+//TODO: More effective
 MemStorage* MemStorage::GenerateInst(bool toCreate)
 {
 	ShmStore* mem = new ShmStore(sizeof(MemStorage), MemStorage::ShmName, toCreate);

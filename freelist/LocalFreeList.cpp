@@ -8,6 +8,8 @@
 #include "LocalFreeList.h"
 #include "MemStorage.h"
 
+#include "CrashPoints.h"
+
 #include <iostream>
 #include <string>
 
@@ -252,14 +254,27 @@ bool LocalFreeList::init(int initBlocks)
 
 bool LocalFreeList::release()
 {
-	//TODO: Check validation of cell id
+	if(!GlobalConfig::IsValidCell(blocks[0]))
+	{
+		abort();
+	}
+
+	//Dead point 1
+	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint21);
+
 	toDelCellId = blocks[0];
+
+	//Dead point 2
+	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint22);
 
 	int num = 0;
 	uint oldTid = cells[toDelCellId].myTid;
 	for(; num < SIBLINGSIZE; num ++)
 	{
 		int otherCellId = cells[toDelCellId].siblings[num];
+
+		//Dead point 3
+		CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint23);
 		if(otherCellId == (int)INVALIDCELL)
 		{
 			break;
@@ -267,12 +282,21 @@ bool LocalFreeList::release()
 
 		cells[otherCellId].myTid.store((oldTid) << CELLLASTTIDSHIFT);
 	}
+
+	//Dead point 4
+	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint24);
+
 	cells[toDelCellId].myTid.store((oldTid) << CELLLASTTIDSHIFT);
 //	cout << "Set release tid " << cells[toDelCellId].myTid << endl;
 
 	MemStorage::GetInstance().release(toDelCellId);
 
+	//Dead point 5
+	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint25);
 	toDelCellId = INVALIDCELL;
+
+	//Dead point 6
+	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint26);
 
 	blocksIndex = 0;
 	sibIndex = num - 1;

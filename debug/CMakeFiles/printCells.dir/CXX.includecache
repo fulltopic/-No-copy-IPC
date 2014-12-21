@@ -47,6 +47,8 @@ atomic
 -
 climits
 -
+vector
+-
 
 freelist/SimpleFreeList.h
 cstdatomic

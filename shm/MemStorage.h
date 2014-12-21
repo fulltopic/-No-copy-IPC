@@ -57,6 +57,7 @@ class MemStorage
 friend class CmmQueue;
 friend class GlobalFreeList;
 friend class Monitor;
+friend class FreeListChecker;
 
 private:
 	Cell cells[TOTALBLOCKSIZE];
@@ -134,6 +135,9 @@ public:
 	 void printCells();
 	 void printTransitCells();
 	 void printGlobalFreeList();
+
+	inline bool checkNoDup() {return freeList.checkNoDup();};
+	inline bool checkNoMiss() {return freeList.checkNoMiss();};
 
 protected:
 	MemStorage();

@@ -375,6 +375,58 @@ test_sndcntnn/fast:
 .PHONY : test_sndcntnn/fast
 
 #=============================================================================
+# Target rules for targets named freelistchecker
+
+# Build rule for target.
+freelistchecker: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 freelistchecker
+.PHONY : freelistchecker
+
+# fast build rule for target.
+freelistchecker/fast:
+	$(MAKE) -f test/monitortest/monitorchecker/CMakeFiles/freelistchecker.dir/build.make test/monitortest/monitorchecker/CMakeFiles/freelistchecker.dir/build
+.PHONY : freelistchecker/fast
+
+#=============================================================================
+# Target rules for targets named test_monitorrelease
+
+# Build rule for target.
+test_monitorrelease: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_monitorrelease
+.PHONY : test_monitorrelease
+
+# fast build rule for target.
+test_monitorrelease/fast:
+	$(MAKE) -f test/monitortest/testrelease/CMakeFiles/test_monitorrelease.dir/build.make test/monitortest/testrelease/CMakeFiles/test_monitorrelease.dir/build
+.PHONY : test_monitorrelease/fast
+
+#=============================================================================
+# Target rules for targets named test_rcvrelease
+
+# Build rule for target.
+test_rcvrelease: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_rcvrelease
+.PHONY : test_rcvrelease
+
+# fast build rule for target.
+test_rcvrelease/fast:
+	$(MAKE) -f test/monitortest/testrelease/CMakeFiles/test_rcvrelease.dir/build.make test/monitortest/testrelease/CMakeFiles/test_rcvrelease.dir/build
+.PHONY : test_rcvrelease/fast
+
+#=============================================================================
+# Target rules for targets named test_sndrelease
+
+# Build rule for target.
+test_sndrelease: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_sndrelease
+.PHONY : test_sndrelease
+
+# fast build rule for target.
+test_sndrelease/fast:
+	$(MAKE) -f test/monitortest/testrelease/CMakeFiles/test_sndrelease.dir/build.make test/monitortest/testrelease/CMakeFiles/test_sndrelease.dir/build
+.PHONY : test_sndrelease/fast
+
+#=============================================================================
 # Target rules for targets named printCells
 
 # Build rule for target.
@@ -386,6 +438,30 @@ printCells: cmake_check_build_system
 printCells/fast:
 	$(MAKE) -f debug/CMakeFiles/printCells.dir/build.make debug/CMakeFiles/printCells.dir/build
 .PHONY : printCells/fast
+
+CrashPoints.o: CrashPoints.cpp.o
+.PHONY : CrashPoints.o
+
+# target to build an object file
+CrashPoints.cpp.o:
+	$(MAKE) -f CMakeFiles/test_4.dir/build.make CMakeFiles/test_4.dir/CrashPoints.cpp.o
+.PHONY : CrashPoints.cpp.o
+
+CrashPoints.i: CrashPoints.cpp.i
+.PHONY : CrashPoints.i
+
+# target to preprocess a source file
+CrashPoints.cpp.i:
+	$(MAKE) -f CMakeFiles/test_4.dir/build.make CMakeFiles/test_4.dir/CrashPoints.cpp.i
+.PHONY : CrashPoints.cpp.i
+
+CrashPoints.s: CrashPoints.cpp.s
+.PHONY : CrashPoints.s
+
+# target to generate assembly for a file
+CrashPoints.cpp.s:
+	$(MAKE) -f CMakeFiles/test_4.dir/build.make CMakeFiles/test_4.dir/CrashPoints.cpp.s
+.PHONY : CrashPoints.cpp.s
 
 GlobalConfig.o: GlobalConfig.cpp.o
 .PHONY : GlobalConfig.o
@@ -440,7 +516,14 @@ help:
 	@echo "... test_monitorcntnn"
 	@echo "... test_rcvcntnn"
 	@echo "... test_sndcntnn"
+	@echo "... freelistchecker"
+	@echo "... test_monitorrelease"
+	@echo "... test_rcvrelease"
+	@echo "... test_sndrelease"
 	@echo "... printCells"
+	@echo "... CrashPoints.o"
+	@echo "... CrashPoints.i"
+	@echo "... CrashPoints.s"
 	@echo "... GlobalConfig.o"
 	@echo "... GlobalConfig.i"
 	@echo "... GlobalConfig.s"

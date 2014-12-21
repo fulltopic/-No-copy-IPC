@@ -1,0 +1,2 @@
+add_subdirectory(monitorchecker)
+add_subdirectory(testrelease)

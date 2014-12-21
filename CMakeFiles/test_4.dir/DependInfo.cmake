@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/zf/workspace_cpp/test_5/CrashPoints.cpp" "/home/zf/workspace_cpp/test_5/CMakeFiles/test_4.dir/CrashPoints.cpp.o"
   "/home/zf/workspace_cpp/test_5/GlobalConfig.cpp" "/home/zf/workspace_cpp/test_5/CMakeFiles/test_4.dir/GlobalConfig.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")

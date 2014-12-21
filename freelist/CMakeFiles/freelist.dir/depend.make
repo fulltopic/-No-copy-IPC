@@ -20,6 +20,7 @@ freelist/CMakeFiles/freelist.dir/GlobalFreeList.cpp.o: utils/ShmStore.h
 
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: freelist/LocalFreeList.cpp
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: freelist/LocalFreeList.h
+freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: CrashPoints.h
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: GlobalConfig.h
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: comm/CmmQueue.h
 freelist/CMakeFiles/freelist.dir/LocalFreeList.cpp.o: freelist/CellBlock.h

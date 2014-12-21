@@ -17,6 +17,7 @@
 #endif
 
 #include <climits>
+#include <vector>
 
 class GlobalFreeList
 {
@@ -24,12 +25,11 @@ friend class MemWrapper;
 friend class MemStorage; //For debug
 
 private:
-//	CellBlock blocks[GLOBALBLOCKSIZE]; //Should be moved into global storage
-	atomic_ulong freeList[GLOBALFREELISTSIZE]; //TODO: SHould be volatile?
-	//TODO: Confirm the atomic primitive operator"=" equals operator "load()"
+	atomic_ulong freeList[GLOBALFREELISTSIZE];
+
+	//TODO: Make use of cashes
 	atomic_uint caches[CACHESIZE];
 //	int availList[GLOBALBLOCKSIZE];
-	//TODO: Add tmp result for local list
 
 //	uint availListHead;
 //	uint availListTail;
@@ -60,6 +60,13 @@ public:
 
 	GlobalFreeList(const GlobalFreeList& copied) = delete;
 	GlobalFreeList& operator=(const GlobalFreeList& copied) = delete;
+
+	bool checkList4Dup(std::vector<bool>& checkList);
+	bool checkList4Miss(std::vector<bool>& checkList);
+	bool checkNoDupInList();
+	bool checkNoMissInList();
+	bool checkNoDup();
+	bool checkNoMiss();
 };
 
 #endif /* GLOBALFREELIST_H_ */

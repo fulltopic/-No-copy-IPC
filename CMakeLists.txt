@@ -50,6 +50,7 @@ add_subdirectory(utils)
 
 #link_directories(stubs fap_dpdk)				
 add_library(test_4 SHARED GlobalConfig.cpp
+							CrashPoints.cpp
 							$<TARGET_OBJECTS:comm>
 							$<TARGET_OBJECTS:freelist>
 							$<TARGET_OBJECTS:monitor>

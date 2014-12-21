@@ -24,6 +24,9 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "test/counterN21/CMakeLists.txt"
   "test/counterN2N/CMakeLists.txt"
   "test/countercommon/CMakeLists.txt"
+  "test/monitortest/CMakeLists.txt"
+  "test/monitortest/monitorchecker/CMakeLists.txt"
+  "test/monitortest/testrelease/CMakeLists.txt"
   "utils/CMakeLists.txt"
   "/usr/share/cmake/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake/Modules/CMakeCXXInformation.cmake"
@@ -62,6 +65,9 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "test/counterN21/CMakeFiles/CMakeDirectoryInformation.cmake"
   "test/counter12N/CMakeFiles/CMakeDirectoryInformation.cmake"
   "test/counterN2N/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "test/monitortest/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "test/monitortest/monitorchecker/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "test/monitortest/testrelease/CMakeFiles/CMakeDirectoryInformation.cmake"
   "debug/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
@@ -88,5 +94,9 @@ SET(CMAKE_DEPEND_INFO_FILES
   "test/counterN2N/CMakeFiles/test_monitorcntnn.dir/DependInfo.cmake"
   "test/counterN2N/CMakeFiles/test_rcvcntnn.dir/DependInfo.cmake"
   "test/counterN2N/CMakeFiles/test_sndcntnn.dir/DependInfo.cmake"
+  "test/monitortest/monitorchecker/CMakeFiles/freelistchecker.dir/DependInfo.cmake"
+  "test/monitortest/testrelease/CMakeFiles/test_monitorrelease.dir/DependInfo.cmake"
+  "test/monitortest/testrelease/CMakeFiles/test_rcvrelease.dir/DependInfo.cmake"
+  "test/monitortest/testrelease/CMakeFiles/test_sndrelease.dir/DependInfo.cmake"
   "debug/CMakeFiles/printCells.dir/DependInfo.cmake"
   )

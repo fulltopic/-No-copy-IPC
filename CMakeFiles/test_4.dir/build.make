@@ -75,9 +75,33 @@ CMakeFiles/test_4.dir/GlobalConfig.cpp.o.provides: CMakeFiles/test_4.dir/GlobalC
 
 CMakeFiles/test_4.dir/GlobalConfig.cpp.o.provides.build: CMakeFiles/test_4.dir/GlobalConfig.cpp.o
 
+CMakeFiles/test_4.dir/CrashPoints.cpp.o: CMakeFiles/test_4.dir/flags.make
+CMakeFiles/test_4.dir/CrashPoints.cpp.o: CrashPoints.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/zf/workspace_cpp/test_5/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/test_4.dir/CrashPoints.cpp.o"
+	g++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/test_4.dir/CrashPoints.cpp.o -c /home/zf/workspace_cpp/test_5/CrashPoints.cpp
+
+CMakeFiles/test_4.dir/CrashPoints.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_4.dir/CrashPoints.cpp.i"
+	g++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/zf/workspace_cpp/test_5/CrashPoints.cpp > CMakeFiles/test_4.dir/CrashPoints.cpp.i
+
+CMakeFiles/test_4.dir/CrashPoints.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_4.dir/CrashPoints.cpp.s"
+	g++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/zf/workspace_cpp/test_5/CrashPoints.cpp -o CMakeFiles/test_4.dir/CrashPoints.cpp.s
+
+CMakeFiles/test_4.dir/CrashPoints.cpp.o.requires:
+.PHONY : CMakeFiles/test_4.dir/CrashPoints.cpp.o.requires
+
+CMakeFiles/test_4.dir/CrashPoints.cpp.o.provides: CMakeFiles/test_4.dir/CrashPoints.cpp.o.requires
+	$(MAKE) -f CMakeFiles/test_4.dir/build.make CMakeFiles/test_4.dir/CrashPoints.cpp.o.provides.build
+.PHONY : CMakeFiles/test_4.dir/CrashPoints.cpp.o.provides
+
+CMakeFiles/test_4.dir/CrashPoints.cpp.o.provides.build: CMakeFiles/test_4.dir/CrashPoints.cpp.o
+
 # Object files for target test_4
 test_4_OBJECTS = \
-"CMakeFiles/test_4.dir/GlobalConfig.cpp.o"
+"CMakeFiles/test_4.dir/GlobalConfig.cpp.o" \
+"CMakeFiles/test_4.dir/CrashPoints.cpp.o"
 
 # External object files for target test_4
 test_4_EXTERNAL_OBJECTS = \
@@ -97,6 +121,7 @@ test_4_EXTERNAL_OBJECTS = \
 "/home/zf/workspace_cpp/test_5/utils/CMakeFiles/utils.dir/Trace.cpp.o"
 
 lib/libtest_4.so: CMakeFiles/test_4.dir/GlobalConfig.cpp.o
+lib/libtest_4.so: CMakeFiles/test_4.dir/CrashPoints.cpp.o
 lib/libtest_4.so: comm/CMakeFiles/comm.dir/CmmQueue.cpp.o
 lib/libtest_4.so: freelist/CMakeFiles/freelist.dir/CellBlock.cpp.o
 lib/libtest_4.so: freelist/CMakeFiles/freelist.dir/GlobalFreeList.cpp.o
@@ -121,6 +146,7 @@ CMakeFiles/test_4.dir/build: lib/libtest_4.so
 .PHONY : CMakeFiles/test_4.dir/build
 
 CMakeFiles/test_4.dir/requires: CMakeFiles/test_4.dir/GlobalConfig.cpp.o.requires
+CMakeFiles/test_4.dir/requires: CMakeFiles/test_4.dir/CrashPoints.cpp.o.requires
 .PHONY : CMakeFiles/test_4.dir/requires
 
 CMakeFiles/test_4.dir/clean:
