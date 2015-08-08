@@ -41,9 +41,6 @@ private:
 public:
 	atomic_uint myTid; //Has to be allocated by monitor
 	atomic_uint dstTid;
-	//Seemed in receiving T, CAS myTid is necessary
-//TODO	char reserve[RESERVESIZE]; To false sharing
-	//TODO: Barrier is better
 	atomic_int siblings[SIBLINGSIZE];
 
 	inline int getMyIndex() {return myIndex;}
