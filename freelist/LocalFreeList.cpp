@@ -13,16 +13,6 @@
 #include <iostream>
 #include <string>
 
-//LocalFreeList::LocalFreeList()
-//	:myTid(MemWrapper::GetNewTid()),
-//	 cells(MemWrapper::GetInstance()->getCells()),
-//	 blocksIndex(0),
-//	 sibIndex(SIBLINGSIZE - 1),
-//	 toDelCellId(FREESLOT),
-//	 toAllocCellId(FREESLOT)
-//{
-//}
-
 LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId, volatile ulong& allocCellId)
 	: myTid(tid),
 	  cells(myCells),
@@ -176,6 +166,8 @@ bool LocalFreeList::fetch()
 //	cout << "Get new bulk " << toAllocCellId << endl;
 	int localBlockIndex = toAllocCellId & DATAMASK;
 	blocks[BLOCKSIZE - 1] = localBlockIndex;
+	toAllocCellId = INVALIDCELL;
+
 
 	int num = 0;
 	for(; num < SIBLINGSIZE; num ++)
@@ -189,7 +181,6 @@ bool LocalFreeList::fetch()
 	}
 	//myTid had been set in GlobalFreeList.pop()
 //	cells[localBlockIndex].myTid.store(myTid);
-	toAllocCellId = INVALIDCELL;
 
 	//TODO: Ensure sibIndex >= 0;
 	blocksIndex = BLOCKSIZE - 1;
@@ -267,8 +258,8 @@ bool LocalFreeList::release()
 	//Dead point 2
 	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint22);
 
+
 	int num = 0;
-	uint oldTid = cells[toDelCellId].myTid;
 	for(; num < SIBLINGSIZE; num ++)
 	{
 		int otherCellId = cells[toDelCellId].siblings[num];
@@ -280,14 +271,12 @@ bool LocalFreeList::release()
 			break;
 		}
 
-		cells[otherCellId].myTid.store((oldTid) << CELLLASTTIDSHIFT);
+		cells[otherCellId].myTid.store(FREETID);
 	}
 
 	//Dead point 4
 	CrashPoints::GetInstance()->Crash(CrashPoints::GetInstance()->CrashInPoint24);
 
-	cells[toDelCellId].myTid.store((oldTid) << CELLLASTTIDSHIFT);
-//	cout << "Set release tid " << cells[toDelCellId].myTid << endl;
 
 	MemStorage::GetInstance().release(toDelCellId);
 
