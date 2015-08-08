@@ -61,27 +61,11 @@ bool GlobalFreeList::init()
 
 bool GlobalFreeList::push(volatile ulong& cellId)
 {
-//	cout << "To release " << cellId << " tail = " << freeListTail << endl;
-	int localCellId = cellId & DATAMASK;
-	if(localCellId < 0)
-	{
-		//TODO: Trace
-		return false;
-	}
-
 	Cell *cells = MemStorage::GetInstance().getCells();
-	uint oldTid = cells[cellId].myTid;
-	cells[cellId].myTid = (oldTid & CELLCURRTIDMASK) << CELLLASTTIDSHIFT;
 
-/* PAY ATTENTIONA. DO NOT REMOVE THIS
-
-	int cacheIndex = random() & CACHEMASK;
-	cellId = caches[cacheIndex].exchange(localCellId);
-	if(cellId == (ulong)FREESLOT)
-	{
-		return true;
-	}
-*/
+	//TODO: The reset of tid may be postponed to the end of push
+	//That depends on pop: If it requires a FREETID.
+	cells[cellId].myTid.store(FREETID);
 
 	bool rc = false;
 	do
@@ -103,21 +87,19 @@ bool GlobalFreeList::push(volatile ulong& cellId)
 		}
 
 		uint nextTail = localTail + 1;
-//		cout << "next tail " << nextTail << endl;
 		if(GlobalConfig::IsEmptySlot(oldVal))
 		{
 			ulong oldCounter = oldVal & COUNTERMASK;
+
+			//TODO: To make a next counter function
 			ulong newVal = cellId | (oldCounter + COUNTERSTEP);
-//			cout << " To release " << localIndex << ":"
-//					<< cellId << ":" << newVal
-//					<< ":" << (newVal & COUNTERMASK)
-//					<< ":" << COUNTERMASK << ":" << COUNTERSTEP
-//					<< endl;
+
 			rc = freeList[localIndex].compare_exchange_strong(oldVal, newVal);
 		}
 		freeListTail.compare_exchange_strong(localTail, nextTail);
 
 	}while(!rc);
+
 
 	//TODOED: Check it
 	cellId = INVALIDCELL;
@@ -129,7 +111,6 @@ bool GlobalFreeList::push(volatile ulong& cellId)
 //Monitor to clean free list before clean cells.
 //cellId from SHM local list tmp result
 
-//TODO Suppose that the pushed cell all had its tid reset as FREETID
 bool GlobalFreeList::pop(volatile ulong& cellId)
 {
 	if(freeListTail == freeListHead)
@@ -142,30 +123,6 @@ bool GlobalFreeList::pop(volatile ulong& cellId)
 	//It is an error
 	Cell *cells = MemStorage::GetInstance().getCells();
 
-/* PAY ATTENTIONA. DO NOT REMOVE THIS
-	int cacheIndex = random() & CACHEMASK;
-	cellId = caches[cacheIndex].exchange(FREESLOT);
-
-	//push() push cellId without reset of Tid. oldTid == FREETID is not a condition any longer
-	if(cellId != (ulong)FREESLOT)
-	{
-//		uint oldTid = cells[cellId].myTid;
-		uint oldTid = FREETID;
-		//How if re-used?
-		//If clean caches at first then there would be no chance? Yes
-		//If recycle happens before get oldTid, cellId can not be fetched by App
-		//If recycle happens after get oldTid, the CAS on oldTid would fail
-		if(cells[cellId].myTid.compare_exchange_strong(oldTid, userId)) //expect true
-		{
-			return true;
-		}else
-		{
-			//As implemented by exchange on slot, oldTid == FREETID is not valid
-			//Had been deleted and re-cycled by monitor. Do not store userId here.
-		}
-	}
-
-*/
 	bool rc = false;
 	do
 	{
@@ -242,6 +199,11 @@ bool GlobalFreeList::pop(volatile ulong& cellId)
 //			;
 //		}
 	}while(!rc);
+
+	if(cells[cellId].myTid != FREETID)
+	{
+		abort();
+	}
 
 	//TODO: The cellId popped had to be accessible to avoid leak. The monitor would
 	// Assert oldTid == FREETID and CAS to MonitorTid then go on.
