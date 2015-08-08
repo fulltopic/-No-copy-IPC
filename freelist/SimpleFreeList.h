@@ -40,6 +40,7 @@ private:
 
 	void init();
 	inline bool isEmptySlot(ulong value) {return ((value & DATAMASK) == FREESLOT);}
+
 public:
 	SimpleFreeList();
 	~SimpleFreeList();
