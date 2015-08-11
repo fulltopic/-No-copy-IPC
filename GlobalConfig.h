@@ -9,6 +9,7 @@
 #define GLOBALCONFIG_H_
 
 #include <climits>
+#include <limits.h>
 #include <sys/types.h>
 #include <stdint.h>
 
@@ -56,6 +57,13 @@ enum STORAGECONSTS
 	SUSPECTALLOCTIDSNUM = GLOBALCELLSIZE / 1024,
 
 	GLOBALAPPNUM = GLOBALQUESIZE,
+};
+
+enum CGCONSTS
+{
+	MINORLOAD = 10,
+	MAJORLOAD = 20,
+	CRITICALLOAD = 30,
 };
 
 enum GLOBALFREELISTCONSTS
@@ -112,6 +120,10 @@ public:
 	inline static bool IsValidTCIndex(int index) {return index >= 0 && index < GLOBALLOCALINDXNUM; };
 	inline static bool IsEmptySlot(const volatile ulong data) { return (data & DATAMASK) == FREEDATA;	};
 	inline static ulong NextCounter(const volatile ulong counter) {return ((counter & COUNTERMASK) + COUNTERSTEP);};
+	inline static ulong NextValue(const uint val, const volatile ulong oldVal)
+	{
+		return ((oldVal & COUNTERMASK) + COUNTERSTEP) | val;
+	}
 	inline static bool IsFreeTid(uint tid) {return (tid & CELLCURRTIDMASK) == FREETID; }
 
 	inline static int GetFreeListCellIndex(const ulong freeListCellId)

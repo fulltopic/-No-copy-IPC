@@ -36,9 +36,22 @@ void Monitor::toCleanDeadPid(const pid_t pid)
 	{
 		deadTids.push(tid);
 
-		if(deadTids.size() > 10)
+		int currLoad = deadTids.size();
+		string warns = NULL;
+		if(currLoad > CRITICALLOAD)
 		{
-		//TODO: Replace 10 by enum and TRACE
+			warns = "CRITICAL";
+		}else if(currLoad > MAJORLOAD)
+		{
+			warns = "MAJOR";
+		}else if(currLoad > MINORLOAD)
+		{
+			warns = "MINOR";
+		}
+
+		if(warns)
+		{
+			cout << warns << ": Too many dead processes: " << currLoad << endl;
 		}
 	}
 }

@@ -20,12 +20,9 @@ private:
 //	GlobalFreeList& globalFreeList;
 	Cell * const cells;
 
-	//TODO: Set as global reference
-//	MemStorage& globalMem;
-
 	//Should they be atomic variables?
-	volatile ulong& toDelCellId;
-	volatile ulong& toAllocCellId;
+	volatile uint& toDelCellId;
+	volatile uint& toAllocCellId;
 
 	int32_t blocksIndex;
 	int32_t sibIndex;
@@ -35,8 +32,8 @@ private:
 	bool release();
 
 public:
-	LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId, volatile ulong& allocCellId);
-	LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId, volatile ulong& allocCellId, int initBlocks);
+	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId);
+	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks);
 	~LocalFreeList();
 	LocalFreeList(const LocalFreeList& copied) = delete;
 	LocalFreeList& operator=(const LocalFreeList& copied) = delete;

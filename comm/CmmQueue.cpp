@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <string>
+#include <string.h>
 
 //TODO: To set const tid at allocation register
 CmmQueue::CmmQueue(): head(0), tail(0), myTid(FREETID), myIndex(-1)
@@ -173,16 +174,6 @@ bool CmmQueue::pop(volatile ulong& cellId)
 			cellId = (ulong)tCellId;
 			head = localHead + 1;
 			return true;
-//			if(cells[tCellId].myTid.compare_exchange_strong(cellTid, myTid))
-//			{
-//				cellId = tCellId;
-//				head = localHead + 1;
-//				cells[tCellId].dstTid = FREETID;
-//				return true;
-//			}else
-//			{
-//				continue;
-//			}
 		}
 	}
 
@@ -211,7 +202,7 @@ void CmmQueue::cleanup()
 	int sibIndex = -1;
 	int cellIndex = INVALIDCELL;
 	bool tailMet = false;
-
+	uint myLocalTid = myTid;
 
 	while(true)
 	{
@@ -232,11 +223,9 @@ void CmmQueue::cleanup()
 //		int freeCellIndex = slots[currIndex] & DATAMASK;
 		int cellTid = cells[freeCellIndex].myTid;
 
-		//If
 		if(!GlobalConfig::IsFreeTid(cellTid))
 		{
-			cells[freeCellIndex].myTid =
-					((myTid) << CELLLASTTIDSHIFT);
+			cells[freeCellIndex].myTid = myLocalTid;
 			cells[freeCellIndex].dstTid = FREETID;
 		}
 

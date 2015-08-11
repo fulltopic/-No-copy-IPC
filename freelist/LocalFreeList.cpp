@@ -13,7 +13,7 @@
 #include <iostream>
 #include <string>
 
-LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId, volatile ulong& allocCellId)
+LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId)
 	: myTid(tid),
 	  cells(myCells),
 	  toDelCellId(delCellId),
@@ -24,7 +24,7 @@ LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId,
 
 }
 
-LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile ulong& delCellId, volatile ulong& allocCellId, int initBlocks)
+LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks)
 : myTid(tid),
   cells(myCells),
   toDelCellId(delCellId),
@@ -96,7 +96,6 @@ bool LocalFreeList::alloc(int& cellId)
 
 	}
 	blockCellId = blocks[blocksIndex];
-//	cout << "blockIndex " << blocksIndex << " blockCellId " << blockCellId << " sibIndex " << sibIndex << endl;
 
 	if(sibIndex == -1)
 	{
@@ -104,14 +103,10 @@ bool LocalFreeList::alloc(int& cellId)
 		if(!GlobalConfig::IsValidCell(cellId))
 		{
 			cout << "Invalid cellId " << cellId << endl;
-//			return NULL;
 		}
 
 	}else
 	{
-		//Exchange is not necessary as the index is in the APP.
-		//If the monitor recycle block before cell, the individual cell can not be duplicated
-//		cellId = cells[blockCellId].siblings[sibIndex].exchange(INVALIDCELL);
 		cellId = cells[blockCellId].siblings[sibIndex];
 		if(!GlobalConfig::IsValidCell(cellId))
 		{
@@ -232,12 +227,13 @@ bool LocalFreeList::init(int initBlocks)
 //		cout << "-------------------------> Init blockId" << toAllocCellId << endl;
 //		cout << "Init fetch set " << cells[toAllocCellId].myTid << " to " << myTid << endl;
 
-		toAllocCellId = INVALIDCELL;
 
 		//TODO: Ensure sibIndex >= 0;
 //		blocksIndex = blocksIndex = i;
 		sibIndex = num - 1;
 	}
+	toAllocCellId = INVALIDCELL;
+
 	blocksIndex = initBlocks;
 
 	return true;

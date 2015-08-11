@@ -116,8 +116,8 @@ public:
 	bool getQIdByAppId(int appId, int& cmmQId);
 
 //	static void InitInstance();
-	inline bool release(volatile ulong &cellId) { return freeList.push(cellId);};
-	inline bool alloc(volatile ulong& cellId) {return freeList.pop(cellId);};
+	inline bool release(volatile uint &cellId) { return freeList.push(cellId);};
+	inline bool alloc(volatile uint& cellId) {return freeList.pop(cellId);};
 //
 	inline Cell *getCells() { return cells;}
 	inline MemBlock *  getBlocks() { return blocks; }

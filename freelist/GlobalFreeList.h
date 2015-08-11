@@ -51,8 +51,8 @@ public:
 	GlobalFreeList();
 	~GlobalFreeList();
 
-	bool push(volatile ulong& cellId);
-	bool pop(volatile ulong& cellId);
+	bool push(volatile uint& cellId);
+	bool pop(volatile uint& cellId);
 
 
 	bool contains(const int cellId);

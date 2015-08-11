@@ -59,7 +59,7 @@ bool GlobalFreeList::init()
 	return true;
 }
 
-bool GlobalFreeList::push(volatile ulong& cellId)
+bool GlobalFreeList::push(volatile uint& cellId)
 {
 	Cell *cells = MemStorage::GetInstance().getCells();
 
@@ -89,10 +89,7 @@ bool GlobalFreeList::push(volatile ulong& cellId)
 		uint nextTail = localTail + 1;
 		if(GlobalConfig::IsEmptySlot(oldVal))
 		{
-			ulong oldCounter = oldVal & COUNTERMASK;
-
-			//TODO: To make a next counter function
-			ulong newVal = cellId | (oldCounter + COUNTERSTEP);
+			ulong newVal = GlobalConfig::NextValue(oldVal, cellId);
 
 			rc = freeList[localIndex].compare_exchange_strong(oldVal, newVal);
 		}
@@ -100,8 +97,6 @@ bool GlobalFreeList::push(volatile ulong& cellId)
 
 	}while(!rc);
 
-
-	//TODOED: Check it
 	cellId = INVALIDCELL;
 	return true;
 }
@@ -111,7 +106,7 @@ bool GlobalFreeList::push(volatile ulong& cellId)
 //Monitor to clean free list before clean cells.
 //cellId from SHM local list tmp result
 
-bool GlobalFreeList::pop(volatile ulong& cellId)
+bool GlobalFreeList::pop(volatile uint& cellId)
 {
 	if(freeListTail == freeListHead)
 	{
@@ -134,11 +129,10 @@ bool GlobalFreeList::pop(volatile ulong& cellId)
 			cellId = FREEDATA;
 			return false;
 		}
+
 		int localIndex = localHead & GLOBALFREELISTMASK;
 
-		//TODO: Prove monitor.clean toAllocCellId
 		cellId = freeList[localIndex];
-//		cout << "----------------> Get cellID " << localIndex << ":" << (cellId & DATAMASK) << endl;
 		if(localHead != freeListHead)
 		{
 			continue;
@@ -149,55 +143,22 @@ bool GlobalFreeList::pop(volatile ulong& cellId)
 		{
 			int cellIndex = cellId & DATAMASK;
 			uint oldTid = cells[cellIndex].myTid;
-			ulong newValue = FREEDATA | ((cellId & COUNTERMASK) + COUNTERSTEP);
+			if(oldTid != FREETID)
+			{
+				cellId = INVALIDCELL;
+				abort();
+			}
 
+			ulong newValue = GlobalConfig::NextValue(FREEDATA, cellId);
 			ulong oldValue = cellId;
 			if(freeList[localIndex].compare_exchange_strong(oldValue, newValue))
 			{
-				if(GlobalConfig::IsFreeTid(oldTid))
-				{
-					rc = cells[cellIndex].myTid.compare_exchange_strong(oldTid, userId);
-				}else
-				{
-					cellId = INVALIDCELL;
-				}
+				cells[cellIndex].myTid.store(userId);
 			}
-/*
-			if(oldTid == FREETID)
-			{
-				ulong oldValue = cellId;
-				if(freeList[localIndex].compare_exchange_strong(oldValue, newValue))
-				{
-//					cout << "GlobalFreeList pop get cellId " << cellId << endl;
-					//TODO: How if died at this point?
-					//Do not store all local list into SHM, but the transit vars (popCellId, pushCellId) into SHM
-					rc = cells[cellIndex].myTid.compare_exchange_strong(oldTid, userId);
 
-					//How if re-used?
-					//Monitor would CAS tid in freelist from A to FREETID, if it's FREETID, to pop it
-					//Do not re-use the FRED cell as the monitor is busying inserting it into free list
-					//				if(!rc && oldTid == FREETID)
-					//				{
-					//					rc = cells[cellId].myTid.store(userId);
-					//				}
-				}else
-				{
-					//Update head index
-				}
-			}else
-			{
-				//TODOED: If continue to push tail = nextTail is OK?
-				//Should recalculate head tail index
-				continue;
-			}
-*/
 		}
 		freeListHead.compare_exchange_strong(localHead, nextHead);
 
-//		if(cellId == 1248)
-//		{
-//			;
-//		}
 	}while(!rc);
 
 	if(cells[cellId].myTid != FREETID)
