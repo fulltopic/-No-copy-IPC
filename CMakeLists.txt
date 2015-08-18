@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.6)
 project(test_5)
 
 set (HOME /home/zf/workspace_cpp/)
-set (PROJ_HOME ${HOME}/test_5)
-set (PROJ_IDIR ${HOME}/test_5)
+set (PROJ_HOME ${HOME}/test5)
+set (PROJ_IDIR ${HOME}/test5)
 
 set (comm.DIR ${PROJ_HOME}/comm)
 set (comm.IDIR ${PROJ_HOME}/comm)

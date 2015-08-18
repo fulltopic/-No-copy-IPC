@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,14 +72,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles /home/zf/workspace_cpp/test_5/proxy/CMakeFiles/progress.marks
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles /home/zf/workspace_cpp/test5/proxy/CMakeFiles/progress.marks
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/clean
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/clean
 .PHONY : clean
 
 # The main clean target
@@ -88,22 +88,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 proxy/CMakeFiles/proxy.dir/rule:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/CMakeFiles/proxy.dir/rule
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 proxy/CMakeFiles/proxy.dir/rule
 .PHONY : proxy/CMakeFiles/proxy.dir/rule
 
 # Convenience name for target.
@@ -112,7 +112,7 @@ proxy: proxy/CMakeFiles/proxy.dir/rule
 
 # fast build rule for target.
 proxy/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/build
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/build
 .PHONY : proxy/fast
 
 AppProxy.o: AppProxy.cpp.o
@@ -120,7 +120,7 @@ AppProxy.o: AppProxy.cpp.o
 
 # target to build an object file
 AppProxy.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.o
 .PHONY : AppProxy.cpp.o
 
 AppProxy.i: AppProxy.cpp.i
@@ -128,7 +128,7 @@ AppProxy.i: AppProxy.cpp.i
 
 # target to preprocess a source file
 AppProxy.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.i
 .PHONY : AppProxy.cpp.i
 
 AppProxy.s: AppProxy.cpp.s
@@ -136,7 +136,7 @@ AppProxy.s: AppProxy.cpp.s
 
 # target to generate assembly for a file
 AppProxy.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxy.cpp.s
 .PHONY : AppProxy.cpp.s
 
 AppProxyInitException.o: AppProxyInitException.cpp.o
@@ -144,7 +144,7 @@ AppProxyInitException.o: AppProxyInitException.cpp.o
 
 # target to build an object file
 AppProxyInitException.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.o
 .PHONY : AppProxyInitException.cpp.o
 
 AppProxyInitException.i: AppProxyInitException.cpp.i
@@ -152,7 +152,7 @@ AppProxyInitException.i: AppProxyInitException.cpp.i
 
 # target to preprocess a source file
 AppProxyInitException.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.i
 .PHONY : AppProxyInitException.cpp.i
 
 AppProxyInitException.s: AppProxyInitException.cpp.s
@@ -160,7 +160,7 @@ AppProxyInitException.s: AppProxyInitException.cpp.s
 
 # target to generate assembly for a file
 AppProxyInitException.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f proxy/CMakeFiles/proxy.dir/build.make proxy/CMakeFiles/proxy.dir/AppProxyInitException.cpp.s
 .PHONY : AppProxyInitException.cpp.s
 
 # Help Target
@@ -189,6 +189,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

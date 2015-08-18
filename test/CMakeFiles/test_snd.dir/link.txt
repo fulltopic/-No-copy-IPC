@@ -1,1 +1,0 @@
-g++   -std=c++0x -ggdb -fsigned-char -freg-struct-return -fPIC -Wall -W -Wshadow -Wpointer-arith -Wcast-qual -Winline -DGNUPC    CMakeFiles/test_snd.dir/TestSnder.cpp.o CMakeFiles/test_snd.dir/TestAppInterface.cpp.o  -o ../bin/test_snd  -L/home/zf/workspace_cpp/test_4/lib -rdynamic -lrt ../lib/libtest_4.so -lrt -lpthread -Wl,-rpath,/home/zf/workspace_cpp/test_4/lib 

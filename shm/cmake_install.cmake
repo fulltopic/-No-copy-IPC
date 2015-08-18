@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5/shm
+# Install script for directory: /home/zf/workspace_cpp/test5/shm
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

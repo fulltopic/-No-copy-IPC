@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/zf/workspace_cpp/test_5/test/countercommon/ReadCounter.cpp
+/home/zf/workspace_cpp/test5/test/countercommon/ReadCounter.cpp
 ShmStore.h
 -
 TestConfig.h

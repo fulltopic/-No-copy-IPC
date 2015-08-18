@@ -100,7 +100,7 @@ bool CmmQueue::push(int cellId)
 
 //TODO: The duplicate cell pushed may cause sequence inversion of messages from the same sender.
 //Cells can only short cut in stack
-bool CmmQueue::pop(volatile ulong& cellId)
+bool CmmQueue::pop(uint& cellId)
 {
 	Cell *const cells = MemStorage::GetInstance().getCells();
 	while(true)
@@ -141,8 +141,12 @@ bool CmmQueue::pop(volatile ulong& cellId)
 			//TODOED: Reduce chance of CAS as corruption happens rarely
 			//Seemed not necessary to CAS as if monitor detected scale cell,
 			//it leaves the ownership to receiver although not executed yet.
-			cells[tCellId].dstTid = FREETID;
+
+			//Set FREETID after set myTid
+			//Or the cell may fail to be asserted as a flying cell
+			//when sender died
 			cells[tCellId].myTid.store(myTid);
+			cells[tCellId].dstTid = FREETID;
 			slots[localIndex] = GlobalConfig::NextValue(FREESLOT, rawCellId);
 			cellId = (ulong)tCellId;
 			head = localHead + 1;

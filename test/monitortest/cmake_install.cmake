@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5/test/monitortest
+# Install script for directory: /home/zf/workspace_cpp/test5/test/monitortest
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/monitortest/monitorchecker/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/monitortest/testrelease/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/monitortest/monitorchecker/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/monitortest/testrelease/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

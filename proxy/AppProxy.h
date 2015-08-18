@@ -26,7 +26,7 @@ public:
 private:
 	CmmQueue& cmmQ;
 	MemBlock *blocks;
-	TransitMemData& myTransitCell;
+//	TransitMemData& myTransitCell;
 	LocalFreeList memPool;
 //	Cell *cells;
 

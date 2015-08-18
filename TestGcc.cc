@@ -8,7 +8,11 @@
 
 
 
+#ifdef OLDCPP
 #include <cstdatomic>
+#else
+#include <atomic>
+#endif
 #include <iostream>
 #include <string>
 #include <unordered_map>

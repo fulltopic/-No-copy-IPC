@@ -37,7 +37,7 @@ void Monitor::toCleanDeadPid(const pid_t pid)
 		deadTids.push(tid);
 
 		int currLoad = deadTids.size();
-		string warns = NULL;
+		string warns = "NORMAL";
 		if(currLoad > CRITICALLOAD)
 		{
 			warns = "CRITICAL";
@@ -47,12 +47,13 @@ void Monitor::toCleanDeadPid(const pid_t pid)
 		}else if(currLoad > MINORLOAD)
 		{
 			warns = "MINOR";
+		}else
+		{
+			return;
 		}
 
-		if(warns)
-		{
-			cout << warns << ": Too many dead processes: " << currLoad << endl;
-		}
+		cout << warns << ": Too many dead processes: " << currLoad << endl;
+
 	}
 }
 

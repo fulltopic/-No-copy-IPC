@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5/test/counter12N
+# Install script for directory: /home/zf/workspace_cpp/test5/test/counter12N
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,14 +72,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles /home/zf/workspace_cpp/test_5/test/common/CMakeFiles/progress.marks
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles /home/zf/workspace_cpp/test5/test/common/CMakeFiles/progress.marks
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/clean
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/clean
 .PHONY : clean
 
 # The main clean target
@@ -88,22 +88,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/common/CMakeFiles/testcommon.dir/rule:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/CMakeFiles/testcommon.dir/rule
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/common/CMakeFiles/testcommon.dir/rule
 .PHONY : test/common/CMakeFiles/testcommon.dir/rule
 
 # Convenience name for target.
@@ -112,7 +112,7 @@ testcommon: test/common/CMakeFiles/testcommon.dir/rule
 
 # fast build rule for target.
 testcommon/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/build
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/build
 .PHONY : testcommon/fast
 
 InitException.o: InitException.cpp.o
@@ -120,7 +120,7 @@ InitException.o: InitException.cpp.o
 
 # target to build an object file
 InitException.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.o
 .PHONY : InitException.cpp.o
 
 InitException.i: InitException.cpp.i
@@ -128,7 +128,7 @@ InitException.i: InitException.cpp.i
 
 # target to preprocess a source file
 InitException.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.i
 .PHONY : InitException.cpp.i
 
 InitException.s: InitException.cpp.s
@@ -136,7 +136,7 @@ InitException.s: InitException.cpp.s
 
 # target to generate assembly for a file
 InitException.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/InitException.cpp.s
 .PHONY : InitException.cpp.s
 
 TestAppInterface.o: TestAppInterface.cpp.o
@@ -144,7 +144,7 @@ TestAppInterface.o: TestAppInterface.cpp.o
 
 # target to build an object file
 TestAppInterface.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.o
 .PHONY : TestAppInterface.cpp.o
 
 TestAppInterface.i: TestAppInterface.cpp.i
@@ -152,7 +152,7 @@ TestAppInterface.i: TestAppInterface.cpp.i
 
 # target to preprocess a source file
 TestAppInterface.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.i
 .PHONY : TestAppInterface.cpp.i
 
 TestAppInterface.s: TestAppInterface.cpp.s
@@ -160,7 +160,7 @@ TestAppInterface.s: TestAppInterface.cpp.s
 
 # target to generate assembly for a file
 TestAppInterface.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestAppInterface.cpp.s
 .PHONY : TestAppInterface.cpp.s
 
 TestConfig.o: TestConfig.cpp.o
@@ -168,7 +168,7 @@ TestConfig.o: TestConfig.cpp.o
 
 # target to build an object file
 TestConfig.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.o
 .PHONY : TestConfig.cpp.o
 
 TestConfig.i: TestConfig.cpp.i
@@ -176,7 +176,7 @@ TestConfig.i: TestConfig.cpp.i
 
 # target to preprocess a source file
 TestConfig.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.i
 .PHONY : TestConfig.cpp.i
 
 TestConfig.s: TestConfig.cpp.s
@@ -184,7 +184,7 @@ TestConfig.s: TestConfig.cpp.s
 
 # target to generate assembly for a file
 TestConfig.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/common/CMakeFiles/testcommon.dir/build.make test/common/CMakeFiles/testcommon.dir/TestConfig.cpp.s
 .PHONY : TestConfig.cpp.s
 
 # Help Target
@@ -216,6 +216,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

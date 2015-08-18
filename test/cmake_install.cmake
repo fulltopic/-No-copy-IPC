@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5/test
+# Install script for directory: /home/zf/workspace_cpp/test5/test
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,13 +34,13 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/common/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/countercommon/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/basic/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/counterN21/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/counter12N/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/counterN2N/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/monitortest/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/common/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/countercommon/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/basic/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/counterN21/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/counter12N/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/counterN2N/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/monitortest/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 

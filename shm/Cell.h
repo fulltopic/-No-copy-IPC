@@ -50,4 +50,12 @@ public:
 	~Cell();
 };
 
+struct TransitMemData
+{
+	atomic_uint myTid;
+	//volatile for garbage collector
+	volatile uint toDelCellId;
+	volatile uint toAlocCellId;
+};
+
 #endif /* CELL_H_ */

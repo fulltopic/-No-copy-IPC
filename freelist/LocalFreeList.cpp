@@ -13,24 +13,40 @@
 #include <iostream>
 #include <string>
 
-LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId)
-	: myTid(tid),
-	  cells(myCells),
-	  toDelCellId(delCellId),
-	  toAllocCellId(allocCellId),
-	  blocksIndex(BLOCKSIZE - 1),
-	  sibIndex(-2)
-{
+//LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId)
+//	: myTid(tid),
+//	  cells(myCells),
+//	  toDelCellId(delCellId),
+//	  toAllocCellId(allocCellId),
+//	  blocksIndex(BLOCKSIZE - 1),
+//	  sibIndex(-2)
+//{
+//
+//}
+//
+//LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks)
+//: myTid(tid),
+//  cells(myCells),
+//  toDelCellId(delCellId),
+//  toAllocCellId(allocCellId),
+//  blocksIndex(BLOCKSIZE - 1),
+//  sibIndex(-2)
+//{
+//	if(!init(initBlocks))
+//	{
+//		cout << "Failed to init memory blocks " << endl;
+//	}
+//	cout << "---------------------> Allocated localfreelist " << myTid << endl;
+//}
 
-}
-
-LocalFreeList::LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks)
-: myTid(tid),
-  cells(myCells),
-  toDelCellId(delCellId),
-  toAllocCellId(allocCellId),
-  blocksIndex(BLOCKSIZE - 1),
-  sibIndex(-2)
+LocalFreeList::LocalFreeList(
+		uint tid, Cell *myCells, TransitMemData& transData, int initBlocks)
+		: myTid(tid),
+		  cells(myCells),
+		  toDelCellId(transData.toDelCellId),
+		  toAllocCellId(transData.toAlocCellId),
+		  blocksIndex(BLOCKSIZE - 1),
+		  sibIndex(-2)
 {
 	if(!init(initBlocks))
 	{

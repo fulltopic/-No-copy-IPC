@@ -6,20 +6,44 @@
 
 #IncludeRegexTransform: 
 
-/home/zf/workspace_cpp/test_5/test/common/TestAppInterface.cpp
+/home/zf/workspace_cpp/test5/test/common/InitException.cpp
+InitException.h
+/home/zf/workspace_cpp/test5/test/common/InitException.h
+sstream
+-
+string.h
+-
+errno.h
+-
+
+/home/zf/workspace_cpp/test5/test/common/InitException.h
+exception
+-
+string
+-
+
+/home/zf/workspace_cpp/test5/test/common/TestAppInterface.cpp
 TestAppInterface.h
-/home/zf/workspace_cpp/test_5/test/common/TestAppInterface.h
+/home/zf/workspace_cpp/test5/test/common/TestAppInterface.h
 sched.h
 -
 pthread.h
 -
 
-/home/zf/workspace_cpp/test_5/test/common/TestAppInterface.h
+/home/zf/workspace_cpp/test5/test/common/TestAppInterface.h
 AppProxy.h
+-
+
+/home/zf/workspace_cpp/test5/test/common/TestConfig.cpp
+TestConfig.h
+-
+iostream
 -
 
 GlobalConfig.h
 climits
+-
+limits.h
 -
 sys/types.h
 -
@@ -134,6 +158,10 @@ sys/types.h
 
 shm/TransitDataAllocException.h
 exception
+-
+
+test/common/TestConfig.h
+string
 -
 
 utils/ShmStore.h

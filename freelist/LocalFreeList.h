@@ -32,8 +32,9 @@ private:
 	bool release();
 
 public:
-	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId);
-	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks);
+//	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId);
+//	LocalFreeList(uint tid, Cell *myCells, volatile uint& delCellId, volatile uint& allocCellId, int initBlocks);
+	LocalFreeList(uint tid, Cell *myCells, TransitMemData& transData, int initBlocks);
 	~LocalFreeList();
 	LocalFreeList(const LocalFreeList& copied) = delete;
 	LocalFreeList& operator=(const LocalFreeList& copied) = delete;

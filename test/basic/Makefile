@@ -42,10 +42,10 @@ EQUALS = =
 CMAKE_EDIT_COMMAND = /usr/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_SOURCE_DIR = /home/zf/workspace_cpp/test5
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test_5
+CMAKE_BINARY_DIR = /home/zf/workspace_cpp/test5
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -72,14 +72,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles /home/zf/workspace_cpp/test_5/test/basic/CMakeFiles/progress.marks
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test_5/CMakeFiles 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles /home/zf/workspace_cpp/test5/test/basic/CMakeFiles/progress.marks
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/zf/workspace_cpp/test5/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/clean
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/clean
 .PHONY : clean
 
 # The main clean target
@@ -88,22 +88,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/preinstall
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/basic/CMakeFiles/test_monitor.dir/rule:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_monitor.dir/rule
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_monitor.dir/rule
 .PHONY : test/basic/CMakeFiles/test_monitor.dir/rule
 
 # Convenience name for target.
@@ -112,12 +112,12 @@ test_monitor: test/basic/CMakeFiles/test_monitor.dir/rule
 
 # fast build rule for target.
 test_monitor/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/build
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/build
 .PHONY : test_monitor/fast
 
 # Convenience name for target.
 test/basic/CMakeFiles/test_rcv.dir/rule:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_rcv.dir/rule
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_rcv.dir/rule
 .PHONY : test/basic/CMakeFiles/test_rcv.dir/rule
 
 # Convenience name for target.
@@ -126,12 +126,12 @@ test_rcv: test/basic/CMakeFiles/test_rcv.dir/rule
 
 # fast build rule for target.
 test_rcv/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/build
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/build
 .PHONY : test_rcv/fast
 
 # Convenience name for target.
 test/basic/CMakeFiles/test_snd.dir/rule:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_snd.dir/rule
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f CMakeFiles/Makefile2 test/basic/CMakeFiles/test_snd.dir/rule
 .PHONY : test/basic/CMakeFiles/test_snd.dir/rule
 
 # Convenience name for target.
@@ -140,7 +140,7 @@ test_snd: test/basic/CMakeFiles/test_snd.dir/rule
 
 # fast build rule for target.
 test_snd/fast:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/build
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/build
 .PHONY : test_snd/fast
 
 TestMonitor.o: TestMonitor.cpp.o
@@ -148,7 +148,7 @@ TestMonitor.o: TestMonitor.cpp.o
 
 # target to build an object file
 TestMonitor.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.o
 .PHONY : TestMonitor.cpp.o
 
 TestMonitor.i: TestMonitor.cpp.i
@@ -156,7 +156,7 @@ TestMonitor.i: TestMonitor.cpp.i
 
 # target to preprocess a source file
 TestMonitor.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.i
 .PHONY : TestMonitor.cpp.i
 
 TestMonitor.s: TestMonitor.cpp.s
@@ -164,7 +164,7 @@ TestMonitor.s: TestMonitor.cpp.s
 
 # target to generate assembly for a file
 TestMonitor.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_monitor.dir/build.make test/basic/CMakeFiles/test_monitor.dir/TestMonitor.cpp.s
 .PHONY : TestMonitor.cpp.s
 
 TestRcver.o: TestRcver.cpp.o
@@ -172,7 +172,7 @@ TestRcver.o: TestRcver.cpp.o
 
 # target to build an object file
 TestRcver.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.o
 .PHONY : TestRcver.cpp.o
 
 TestRcver.i: TestRcver.cpp.i
@@ -180,7 +180,7 @@ TestRcver.i: TestRcver.cpp.i
 
 # target to preprocess a source file
 TestRcver.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.i
 .PHONY : TestRcver.cpp.i
 
 TestRcver.s: TestRcver.cpp.s
@@ -188,7 +188,7 @@ TestRcver.s: TestRcver.cpp.s
 
 # target to generate assembly for a file
 TestRcver.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_rcv.dir/build.make test/basic/CMakeFiles/test_rcv.dir/TestRcver.cpp.s
 .PHONY : TestRcver.cpp.s
 
 TestSnder.o: TestSnder.cpp.o
@@ -196,7 +196,7 @@ TestSnder.o: TestSnder.cpp.o
 
 # target to build an object file
 TestSnder.cpp.o:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.o
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.o
 .PHONY : TestSnder.cpp.o
 
 TestSnder.i: TestSnder.cpp.i
@@ -204,7 +204,7 @@ TestSnder.i: TestSnder.cpp.i
 
 # target to preprocess a source file
 TestSnder.cpp.i:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.i
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.i
 .PHONY : TestSnder.cpp.i
 
 TestSnder.s: TestSnder.cpp.s
@@ -212,7 +212,7 @@ TestSnder.s: TestSnder.cpp.s
 
 # target to generate assembly for a file
 TestSnder.cpp.s:
-	cd /home/zf/workspace_cpp/test_5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.s
+	cd /home/zf/workspace_cpp/test5 && $(MAKE) -f test/basic/CMakeFiles/test_snd.dir/build.make test/basic/CMakeFiles/test_snd.dir/TestSnder.cpp.s
 .PHONY : TestSnder.cpp.s
 
 # Help Target
@@ -246,6 +246,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/zf/workspace_cpp/test_5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/zf/workspace_cpp/test5 && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

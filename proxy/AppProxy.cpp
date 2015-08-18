@@ -20,8 +20,9 @@ AppProxy::AppProxy(int appId): myAppId(appId),
 					myTid(MemStorage::GetInstance().getNewTid()),
 					cmmQ(MemStorage::GetInstance().allocCmmQueue(myTid)),
 					blocks(MemStorage::GetInstance().getBlocks()),
-					myTransitCell(MemStorage::GetInstance().allocTransitMemCell(myTid)),
-					memPool(myTid, MemStorage::GetInstance().getCells(), myTransitCell.toDelCellId, myTransitCell.toAlocCellId, BLOCKSIZE / 2)
+//					myTransitCell(MemStorage::GetInstance().allocTransitMemCell(myTid)),
+					memPool(myTid, MemStorage::GetInstance().getCells(),
+							MemStorage::GetInstance().allocTransitMemCell(myTid), BLOCKSIZE / 2)
 {
 	if(!MemStorage::GetInstance().registerApp(myAppId, cmmQ.getMyIndex(), myTid))
 	{
@@ -110,10 +111,10 @@ bool AppProxy::send(void* mem, int dstAppId)
 
 void* AppProxy::recv()
 {
-	myTransitCell.toAlocCellId = INVALIDCELL;
-	if(cmmQ.pop(myTransitCell.toAlocCellId))
+	uint cellId = INVALIDCELL;
+	if(cmmQ.pop(cellId))
 	{
-		return cellId2Data(myTransitCell.toAlocCellId);
+		return cellId2Data(cellId);
 	}else
 	{
 		return NULL;

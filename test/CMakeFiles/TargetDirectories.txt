@@ -1,2 +1,0 @@
-/home/zf/workspace/test_4/test/CMakeFiles/test_app.dir
-/home/zf/workspace/test_4/test/CMakeFiles/test_monitor.dir

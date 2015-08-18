@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5/proxy
+# Install script for directory: /home/zf/workspace_cpp/test5/proxy
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)

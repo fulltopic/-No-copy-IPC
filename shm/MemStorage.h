@@ -35,13 +35,6 @@ public:
 	inline int getMyIndex() { return myIndex;}
 };
 
-struct TransitMemData
-{
-	atomic_uint myTid;
-	//volatile for garbage collector
-	volatile uint toDelCellId;
-	volatile uint toAlocCellId;
-};
 
 struct AppInfo
 {

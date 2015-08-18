@@ -1,4 +1,4 @@
-# Install script for directory: /home/zf/workspace_cpp/test_5
+# Install script for directory: /home/zf/workspace_cpp/test5
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,14 +34,14 @@ ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  INCLUDE("/home/zf/workspace_cpp/test_5/comm/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/freelist/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/monitor/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/proxy/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/shm/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/utils/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/test/cmake_install.cmake")
-  INCLUDE("/home/zf/workspace_cpp/test_5/debug/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/comm/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/freelist/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/monitor/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/proxy/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/shm/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/utils/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/test/cmake_install.cmake")
+  INCLUDE("/home/zf/workspace_cpp/test5/debug/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
@@ -51,7 +51,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/zf/workspace_cpp/test_5/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/home/zf/workspace_cpp/test5/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/zf/workspace_cpp/test_5/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/home/zf/workspace_cpp/test5/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

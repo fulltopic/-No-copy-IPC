@@ -42,7 +42,7 @@ public:
 	CmmQueue& operator=(const CmmQueue& copied) = delete;
 
 	//TODO： Ensure reference is not necessary
-	bool pop(volatile ulong& cellId);
+	bool pop(uint& cellId);
 	bool push(int cellId);
 
 	//TODO: Reorganize sequence
