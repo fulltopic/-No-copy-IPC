@@ -19,6 +19,8 @@ enum TIDS
 {
 	FREETID = 0,
 	INVALIDTID = (int)((uint)(0 -1)), //TODO: Replaced by INT_MAX
+	DIRTYTID = (int)(UINT_MAX & (~ (uint)(INT_MAX))),
+	TIDMASK = ~DIRTYTID,
 };
 
 
@@ -120,11 +122,17 @@ public:
 	inline static bool IsValidTCIndex(int index) {return index >= 0 && index < GLOBALLOCALINDXNUM; };
 	inline static bool IsEmptySlot(const volatile ulong data) { return (data & DATAMASK) == FREEDATA;	};
 	inline static ulong NextCounter(const volatile ulong counter) {return ((counter & COUNTERMASK) + COUNTERSTEP);};
+	inline static uint GetTid(uint tid) { return tid & TIDMASK; }
+	inline static bool IsFreeTid(uint tid) { return GetTid(tid) == FREETID; }
 	inline static ulong NextValue(const uint val, const volatile ulong oldVal)
 	{
 		return ((oldVal & COUNTERMASK) + COUNTERSTEP) | val;
 	}
-	inline static bool IsFreeTid(uint tid) {return (tid & CELLCURRTIDMASK) == FREETID; }
+	inline static uint CurrValue(const volatile ulong slotV)
+	{
+		return slotV & DATAMASK;
+	}
+	inline static bool IsDirtyTid(uint tid) {return tid == (DIRTYTID | FREETID); }
 
 	inline static int GetFreeListCellIndex(const ulong freeListCellId)
 	{

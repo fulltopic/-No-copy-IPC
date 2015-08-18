@@ -39,8 +39,8 @@ struct TransitMemData
 {
 	atomic_uint myTid;
 	//volatile for garbage collector
-	volatile ulong toDelCellId;
-	volatile ulong toAlocCellId;
+	volatile uint toDelCellId;
+	volatile uint toAlocCellId;
 };
 
 struct AppInfo
@@ -107,6 +107,7 @@ public:
 
 	bool isInAllocTransit(int cellId) const;
 	bool isInDetailAllocTransit(int cellId) const;
+	bool isInRelTransit(int cellId) const;
 
 	bool isFlying(uint dstTid, int cellId) const;
 
@@ -148,7 +149,7 @@ protected:
 	//TODO: Invoke the destruction in some proxy
 	void operator delete(void*, void* loc);
 
-	bool getTransitCell(uint tid, ulong& toDelCellId, ulong& toAlocCellId);
+	bool getTransitCell(uint tid, uint& toDelCellId, uint& toAlocCellId);
 	inline CmmQueue* getQs() { return qs; }
 	inline GlobalFreeList& getFreeList() { return freeList; }
 

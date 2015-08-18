@@ -70,28 +70,19 @@ bool CmmQueue::push(int cellId)
 		}
 
 		int localCellId = cellId & DATAMASK;
-		//TODO: Seemed no duplicate case
-		if((uint)(cells[localCellId].myTid & CELLCURRTIDMASK) == myTid)
-		{
-			//It is a duplicated cell that had been pushed into the queue and popped by receiver
-			cout <<  __FILE__ << ":" << __LINE__ << " The cell had unexpected owner " << myTid << "," << myIndex << endl;
-			return true;
-		}
-//		cout <<  __FILE__ << ":" << __LINE__ << " The cell had EXPECTED owner " << myTid << endl;
+		uint nextTail = localTail + 1;
+		int localIndex = localTail & GLOBALQUEMASK;
+		ulong tCellId = slots[localIndex];
 
 		if(localTail != tail)
 		{
 			continue;
 		}
 
-		uint nextTail = localTail + 1;
-		int localIndex = localTail & GLOBALQUEMASK;
-		ulong tCellId = slots[localIndex];
-
 //		cout << "Get newValue " << newValue << endl;
 		if(GlobalConfig::IsEmptySlot(tCellId))
 		{
-			ulong newValue = (ulong)cellId | GlobalConfig::NextCounter(tCellId);
+			ulong newValue = GlobalConfig::NextValue(cellId, tCellId);
 			if(slots[localIndex].compare_exchange_strong(tCellId, newValue))
 			{
 				tail.compare_exchange_strong(localTail, nextTail);
@@ -118,32 +109,16 @@ bool CmmQueue::pop(volatile ulong& cellId)
 //		cout << "Is empty? " << tail << " " << localHead << endl;
 		if(localHead == tail)
 		{
-//			cout << "Empty queue " << endl;
 			return false;
 		}
 
 		int localIndex = localHead & GLOBALQUEMASK;
 
 		ulong rawCellId = slots[localIndex];
-//		cout << "tCellId = " << tCellId << endl;
 
 		//One pop user supposed, so no case the index refers to unexpected FREESLOT
 
-
-
-		//TODOED: THE DSTTID STILL FACES ABA
-		//Then, it not ABA, its duplicate cell in list. Then cellTid of the cell could be
-		//A: original TID. It is OK. Even if the cell had been recycled, it contains the fresh content.
-		//FREETID: Had been retired. Do not use.
-		//myTid: The Cell had been received. Then it may be re-cycled. To be continued.
-		//C: Others. That is OK. If the dstTid is not myTid, failed; else, it contains the fresh content.
-		//	Then, if cell had been received then re-cycled. The status is corresponding to another cycle of above 4 cases
-
-		//Monitor set dstTid as FREETID after CAS owner TID as FREETID.
-		//Then, there is no case that the de-queuer gets the dirty dstTID and new owner id.
-		//That is, SET of dstTid is enough, not necessary of CAS
 		if(GlobalConfig::IsEmptySlot(rawCellId))
-//		if(cellTid == FREETID || dstTid != myTid)
 		{
 			continue;
 		}
@@ -155,8 +130,6 @@ bool CmmQueue::pop(volatile ulong& cellId)
 		{
 			cout << "Fatal error " << endl;
 			abort();
-//			head = localHead + 1;
-//			continue;
 		}
 		if(cellTid == myTid) //Impossible
 		{
@@ -168,9 +141,9 @@ bool CmmQueue::pop(volatile ulong& cellId)
 			//TODOED: Reduce chance of CAS as corruption happens rarely
 			//Seemed not necessary to CAS as if monitor detected scale cell,
 			//it leaves the ownership to receiver although not executed yet.
-			cells[tCellId].myTid.store(myTid);
 			cells[tCellId].dstTid = FREETID;
-			slots[localIndex] = FREESLOT | GlobalConfig::NextCounter(rawCellId);
+			cells[tCellId].myTid.store(myTid);
+			slots[localIndex] = GlobalConfig::NextValue(FREESLOT, rawCellId);
 			cellId = (ulong)tCellId;
 			head = localHead + 1;
 			return true;
@@ -184,7 +157,7 @@ bool CmmQueue::pop(volatile ulong& cellId)
 //Obviously, all cells in queue has no sibling
 
 //TODOED: Pay attention to last enqueued one as. Seemed nothing special
-//TODO： To set the empty with new counter by CAS so that further push will fail
+//TODOED： To set the empty with new counter by CAS so that further push will fail
 void CmmQueue::cleanup()
 {
 	Cell * cells = MemStorage::GetInstance().getCells();
@@ -201,55 +174,45 @@ void CmmQueue::cleanup()
 
 	int sibIndex = -1;
 	int cellIndex = INVALIDCELL;
-	bool tailMet = false;
 	uint myLocalTid = myTid;
 
-	while(true)
+	//TODOED: To prove
+	//When queue had been set full, no matter how many producer are sending,
+	//only one of them can push successfully, while the timing of value set/read is an issue
+	//It is OK, as producer gets old value before tail updated to full
+	//And when empty slot CAS succeeded, producer must fail
+	volatile uint tCellIndex = INVALIDCELL;
+	for(int i = 0; i < GLOBALQUEMASK; i ++)
 	{
-		if(currIndex == tailIndex)
-		{
-			tailMet = true;
-		}
+		ulong slotV = slots[currIndex];
+		ulong nextV = GlobalConfig::NextValue(FREESLOT, slotV);
 
-		uint freeCellIndex = slots[currIndex] & DATAMASK;
-		if(tailMet)
+		if(GlobalConfig::IsEmptySlot(slotV))
 		{
-			if(freeCellIndex == FREESLOT)
+			if(slots[currIndex].compare_exchange_strong(slotV, nextV))
 			{
-				break;
+				continue;
+			}else
+			{
+				slotV = slots[currIndex];
+				nextV = GlobalConfig::NextValue(FREESLOT, slotV);
 			}
 		}
 
-//		int freeCellIndex = slots[currIndex] & DATAMASK;
-		int cellTid = cells[freeCellIndex].myTid;
-
-		if(!GlobalConfig::IsFreeTid(cellTid))
-		{
-			cells[freeCellIndex].myTid = myLocalTid;
-			cells[freeCellIndex].dstTid = FREETID;
-		}
-
-		//Seemed no such case if no duplicate cells in global list
-//		if(!(cellTid == FREETID || cells[freeCellIndex].dstTid != myTid || cells[freeCellIndex].myTid == myTid))
-//		{
-//			cells[freeCellIndex].myTid = FREETID;
-//			cells[freeCellIndex].dstTid = FREETID;
-//		}
-
-		//TODO: Before tail met, just assign myTid and dstTid as FREETID
-		//TODO: After tail, should wait the sender CAS these TIDS. How to guarantee?
-		//TODO: If sender died, then deadlock
-		//TODO: To make the queue full to prevent further push
+		slots[currIndex] = nextV;
+		uint freeCellIndex = GlobalConfig::CurrValue(slotV);
+		cells[freeCellIndex].myTid = myLocalTid;
+		cells[freeCellIndex].dstTid = FREETID;
 
 		sibIndex = (sibIndex + 1) & SIBLINGMASK;
-		currIndex  = (currIndex + 1) & GLOBALQUEMASK;
+		currIndex  = (currIndex + i) & GLOBALQUEMASK;
 
 		if(sibIndex == 0)
 		{
 			//Initial cellIndex
 			if(cellIndex != (int)INVALIDCELL)
 			{
-				volatile ulong tCellIndex = cellIndex;
+				tCellIndex = cellIndex;
 				MemStorage::GetInstance().release(tCellIndex);
 			}
 			cellIndex = freeCellIndex;
@@ -259,17 +222,17 @@ void CmmQueue::cleanup()
 		}
 	}
 
-	//TODOED: What's this for?
 	//Deal with the remaining.
-	volatile ulong tCellIndex = cellIndex;
 	if(cellIndex == (int)INVALIDCELL)
 	{
 		return;
 	}else
 	{
+		tCellIndex = cellIndex;
 		MemStorage::GetInstance().release(tCellIndex);
 	}
 }
+
 
 bool CmmQueue::contains(int cellId) const
 {
@@ -280,7 +243,7 @@ bool CmmQueue::contains(int cellId) const
 	{
 		int index = i & GLOBALQUEMASK;
 
-		if(slots[index] == (ulong)cellId)
+		if(GlobalConfig::CurrValue(slots[index]) == cellId)
 		{
 			return true;
 		}

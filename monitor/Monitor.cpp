@@ -95,12 +95,13 @@ void Monitor::cleanCells(const uint tid)
 	cleanSingleCells(tid);
 }
 
-//TODOED: To fine the 2 functions
 void Monitor::cleanBlockCells(const uint tid)
 {
 	Cell *cells = MemStorage::GetInstance(true).getCells();
 	int mergeCellId = INVALIDCELL;
 	int sibIndex = 0;
+	volatile uint tmpI;
+
 	for(int i = 0; i < GLOBALCELLSIZE; i ++)
 	{
 		uint currTid = cells[i].myTid;
@@ -116,11 +117,11 @@ void Monitor::cleanBlockCells(const uint tid)
 			for(int j = 0; j < SIBLINGSIZE; j ++)
 			{
 				int sibCellId = cells[i].siblings[j];
-				cells[sibCellId].myTid = (currTid << CELLLASTTIDSHIFT);
+				cells[sibCellId].myTid = FREETID;
 			}
-			cells[i].myTid = (currTid << CELLLASTTIDSHIFT);
+			cells[i].myTid = FREETID;
 
-			volatile ulong tmpI = i;
+			tmpI = i;
 			MemStorage::GetInstance(true).release(tmpI);
 
 			continue;
@@ -138,42 +139,13 @@ void Monitor::cleanBlockCells(const uint tid)
 				}
 
 				cells[i].siblings[j] = INVALIDCELL;
-				cells[tCellId].myTid = (currTid << CELLLASTTIDSHIFT);
+				cells[tCellId].myTid = FREETID;
 				mergeCell(mergeCellId, sibIndex, tCellId);
 			}
-			cells[i].myTid = ((currTid << CELLLASTTIDSHIFT) | FREETID);
+			cells[i].myTid = FREETID;
 			mergeCell(mergeCellId, sibIndex, i);
 		}
 
-
-//		if(mergeCellId == INVALIDCELL)
-//		{
-//			mergeCell(mergeCellId, sibIndex, i);
-//		}
-//		else
-//		{
-//			if(cells[i].siblings[0] == INVALIDCELL)
-//			{
-//				//To recycle block cell at first to avoid the case that
-//				//a cell had been recycled as single cell and then as block cell
-//				continue;
-//			}
-//			for(int j = SIBLINGSIZE - 1; j >= 0; j --)
-//			{
-//				if(cells[i].siblings[j] == INVALIDCELL)
-//				{
-//					continue;
-//				}
-//
-//				int tCellId = cells[i].siblings[j];
-//				cells[i].siblings[j] = INVALIDCELL;
-//				cells[tCellId].myTid = FREETID;
-//
-//				mergeCell(mergeCellId, sibIndex, tCellId);
-//			}
-//			cells[i].myTid = FREETID;
-//			mergeCell(mergeCellId, sibIndex, i);
-//		}
 	}
 }
 
@@ -194,8 +166,6 @@ void Monitor::cleanSingleCells(const uint tid)
 
 		if(cells[i].siblings[0] == (int)INVALIDCELL)
 		{
-//			uint userTid = tid;
-
 			uint dstTid = cells[i].dstTid;
 			if(dstTid != FREETID)
 			{
@@ -217,7 +187,7 @@ void Monitor::cleanSingleCells(const uint tid)
 					//and then myTid != tid
 					if(cells[i].myTid == tid)
 					{
-						cells[i].myTid = ((currTid << CELLLASTTIDSHIFT) | FREETID);
+						cells[i].myTid = FREETID;
 						cells[i].dstTid = FREETID;
 					}else
 					{
@@ -226,7 +196,7 @@ void Monitor::cleanSingleCells(const uint tid)
 				}
 			}else
 			{
-				cells[i].myTid = ((currTid << CELLLASTTIDSHIFT) | FREETID);
+				cells[i].myTid = FREETID;
 				cells[i].dstTid = FREETID;
 			}
 			mergeCell(mergeCellId, sibIndex, i);
@@ -234,175 +204,70 @@ void Monitor::cleanSingleCells(const uint tid)
 	}
 }
 
-//No case that sibling is released and block had not
-void Monitor::cleanSuspectCells(const uint tid, const int localDelCellId)
+
+void Monitor::cleanTransitCell(const uint cellId, const uint tid)
 {
-	uint suspectCellId = MemStorage::GetInstance(true).getSuspectAllocCell(tid);
-	Cell *cells = MemStorage::GetInstance(true).getCells();
-	GlobalFreeList& freeList = MemStorage::GetInstance(true).getFreeList();
+	Cell* cells = MemStorage::GetInstance(true).getCells();
 
-	while(suspectCellId != INVALIDCELL)
+	if(cellId == INVALIDCELL)
 	{
-		bool toRelease = false;
-
-		if((GlobalConfig::IsFreeTid(cells[suspectCellId].myTid) &&
-				(cells[suspectCellId].myTid & CELLLASTTIDMASK) == (tid << CELLLASTTIDSHIFT)))
-		{
-			if(freeList.containsInDetail((int)suspectCellId))
-			{
-				toRelease = false;
-			}else if(MemStorage::GetInstance(true).isInDetailAllocTransit(localDelCellId))
-			{
-				toRelease = false;
-			}
-			//TODO: a timely routine, go through the whole freelist and alloc list
-			else if((uint)localDelCellId != INVALIDCELL)
-			{
-				if(suspectCellId != (uint)localDelCellId)
-				{
-					for(int i = 0; i < SIBLINGSIZE; i ++)
-					{
-						if((uint)cells[localDelCellId].siblings[i] == INVALIDCELL)
-						{
-							toRelease = true;
-							break;
-						}
-						else if((uint)cells[localDelCellId].siblings[i] == suspectCellId)
-						{
-							//To recycle by tid
-							toRelease = false;
-							break;
-						}
-					}
-				}else
-				{
-					//To recycled by tid
-					toRelease = false;
-				}
-			}else
-			{
-				//Not recycled by tid
-				toRelease = true;
-			}
-		}else
-		{
-			//Had been recycled
-			toRelease = false;
-		}
-
-
-		if(toRelease)
-		{
-			if((GlobalConfig::IsFreeTid(cells[suspectCellId].myTid) &&
-							(cells[suspectCellId].myTid & CELLLASTTIDMASK) == (tid << CELLLASTTIDSHIFT)))
-			{
-				uint oldTid = (tid << CELLLASTTIDSHIFT) | FREETID;
-				uint newTid = (INVALIDTID << CELLLASTTIDSHIFT) | FREETID;
-
-				cells[suspectCellId].myTid.compare_exchange_strong(oldTid, newTid);
-				volatile ulong tmpCellId = suspectCellId;
-				MemStorage::GetInstance(true).release(tmpCellId);
-			}else
-			{
-				//Allocated by others
-			}
-		}
-
-		suspectCellId = MemStorage::GetInstance(true).getSuspectAllocCell(tid);
+		return;
 	}
+
+	if(cells[cellId].myTid != FREETID)
+	{
+		return;
+	}
+
+	uint oldV = FREETID;
+	uint newV = FREETID | DIRTYTID;
+	if(!cells[cellId].myTid.compare_exchange_strong(oldV, newV))
+	{
+		return;
+	}
+
+	if(MemStorage::GetInstance(true).isInRelTransit(cellId))
+	{
+		return;
+	}else if(!GlobalConfig::IsDirtyTid(cells[cellId].myTid))
+	{
+		return;
+	}
+
+	if(MemStorage::GetInstance(true).freeList.contains(cellId))
+	{
+		return;
+	}else if(!GlobalConfig::IsDirtyTid(cells[cellId].myTid))
+	{
+		return;
+	}
+
+	if(MemStorage::GetInstance(true).isInAllocTransit(cellId))
+	{
+		return;
+	}else if(!GlobalConfig::IsDirtyTid(cells[cellId].myTid))
+	{
+		return;
+	}
+
+
+	cells[cellId].myTid = tid;
+	return;
 }
 
 void Monitor::cleanTransitCells(const uint tid)
 {
-	ulong toDelCellId = INVALIDCELL;
-	ulong toAllocCellId = INVALIDCELL;
+	uint toDelCellId = INVALIDCELL;
+	uint toAllocCellId = INVALIDCELL;
 
 	if(!MemStorage::GetInstance(true).getTransitCell(tid, toDelCellId, toAllocCellId))
 	{
 		cout << "Failed to get transitcells for tid " << tid << endl;
 		return;
-	}else
-	{
-		cout << "To clean delCellId " << toDelCellId << endl;
-		cout << "To clean allocCellId " << toAllocCellId << endl;
-	}
-	int localDelCellId = toDelCellId & DATAMASK;
-	cleanSuspectCells(tid, localDelCellId);
-
-	GlobalFreeList& freeList = MemStorage::GetInstance(true).getFreeList();
-	Cell* cells = MemStorage::GetInstance(true).getCells();
-
-
-	if((uint)localDelCellId != (uint)INVALIDCELL)
-	{
-		if(cells[localDelCellId].myTid == tid) //Remove not began
-		{
-			for(int i = 0; i < SIBLINGSIZE; i ++)
-			{
-				int internalCellId = cells[localDelCellId].siblings[i];
-				if((uint)internalCellId == (uint)INVALIDCELL)
-				{
-					break;
-				}
-				cells[internalCellId].myTid = FREETID;
-			}
-			cells[localDelCellId].myTid = FREETID;
-			freeList.push(toDelCellId);
-		}else if(GlobalConfig::IsFreeTid(cells[localDelCellId].myTid)) //Remove may not finished
-		{
-			//TODO: To prove it's correct
-			//It may before recycle || recycled || recycled and recycled by others
-			if(!freeList.contains(localDelCellId) && !MemStorage::GetInstance(true).isInAllocTransit(localDelCellId))
-			{
-				//TODO: Can distinguish //It may before recycle || before recycle by others
-				if(cells[localDelCellId].myTid == ((tid << CELLLASTTIDSHIFT) |FREETID))
-				{
-					freeList.push(toDelCellId);
-				}
-
-				//Maybe duplicate items in freelist, while unique in-use
-			}
-		}else
-		{
-			//Had been reused
-		}
 	}
 
-	int localAllocCellId = toAllocCellId & DATAMASK;
-
-	//Allocation failed or not finished
-	if((uint)localAllocCellId != INVALIDCELL)
-	{
-		//TODO: Check  the freelist and alllocTransit
-		if(GlobalConfig::IsFreeTid(cells[localAllocCellId].myTid))
-		{
-			if(!freeList.contains(localAllocCellId) && !MemStorage::GetInstance(true).isInAllocTransit(localAllocCellId))
-			{
-//			uint expTid = FREETID;
-//			if(cells[localAllocCellId].myTid.compare_exchange_strong(expTid, tid))
-//			{
-//				//Sibling had been reset before it's been pushed into global list
-////				toAllocCellId = localAllocCellId;
-////				freeList.push(toAllocCellId);
-//				//To be released by cleanBlockCells()
-//			}else
-//			{
-//				//Occupied by other TID
-//			}
-				uint suspectTid = (cells[localAllocCellId].myTid & CELLLASTTIDMASK);
-				MemStorage::GetInstance(true).putSuspectAllocCell(localAllocCellId, suspectTid);
-			}else
-			{
-				//Occupied by other TID
-			}
-		}else
-		{
-			//Occupied by other TID
-		}
-	}
-
-	toDelCellId = INVALIDCELL;
-	toAllocCellId = INVALIDCELL;
+	cleanTransitCell(toAllocCellId, tid);
+	cleanTransitCell(toDelCellId, tid);
 }
 
 //TODO: Set valid cell id with last cell id
@@ -435,7 +300,7 @@ void Monitor::mergeCell(int& blockId, int& sibIndex, int cellId)
 
 		if(sibIndex == SIBLINGSIZE)
 		{
-			volatile ulong tBlockId = blockId;
+			volatile uint tBlockId = blockId;
 			MemStorage::GetInstance(true).release(tBlockId);
 
 			sibIndex = 0;
@@ -466,22 +331,6 @@ void Monitor::runRoutine()
 		}
 	}
 
-//	while(isRunning)
-//	{
-//		if(deadPids.empty())
-//		{
-//			sleep(1);
-//		}else
-//		{
-//			pid_t toDelPid = deadPids.front();
-//			deadPids.pop();
-//			uint toDelTid = INVALIDTID;
-//			if(MemStorage::GetInstance(true).findTidByPid(toDelPid, toDelTid))
-//			{
-//				cleanDeadTid(toDelTid);
-//			}
-//		}
-//	}
 }
 
 void Monitor::startCollector()

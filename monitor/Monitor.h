@@ -40,9 +40,9 @@ private:
 //	queue<pid_t> deadPids;
 	void cleanDeadTid(const uint tid);
 
-	void cleanSuspectCells(const uint tid, const int localDelCellId);
 	void cleanCmmQs(const uint tid);
 	void cleanCells(const uint tid);
+	void cleanTransitCell(const uint cellId, const uint tid);
 	void cleanTransitCells(const uint tid);
 	void cleanBlockCells(const uint tid);
 	void cleanSingleCells(const uint tid);

@@ -145,6 +145,23 @@ bool MemStorage::isInAllocTransit(int cellId) const
 	return false;
 }
 
+bool MemStorage::isInRelTransit(int cellId) const
+{
+	if(!GlobalConfig::IsValidCell(cellId))
+	{
+		return false;
+	}
+	for(int i = 0; i < (int)(sizeof(transitCells) / sizeof(TransitMemData));i ++)
+	{
+		if(transitCells[i].toDelCellId == (ulong)cellId)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 bool MemStorage::isInDetailAllocTransit(int cellId) const
 {
 //	Cell *cells = MemStorage::GetInstance().getCells();
@@ -433,17 +450,13 @@ void MemStorage::clearAppResource(const uint tid)
 		}
 	}else
 	{
-//		for(int i = 0; i < GLOBALLOCALINDXNUM; i ++)
-//		{
-//			cout << "Transit cells " << i << ":" << transitCells[i].myTid << endl;
-//		}
 		abort();
 	}
 
 	return;
 }
 
-bool MemStorage::getTransitCell(uint tid, ulong& toDelCellId, ulong& toAlocCellId)
+bool MemStorage::getTransitCell(uint tid, uint& toDelCellId, uint& toAlocCellId)
 {
 	for(int i = 0; i < GLOBALLOCALINDXNUM; i ++)
 	{
