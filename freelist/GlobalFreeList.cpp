@@ -56,6 +56,8 @@ bool GlobalFreeList::init()
 	{
 		caches[i] = FREESLOT;
 	}
+
+	cout << "Global head set as " << freeListHead << endl;
 	return true;
 }
 
@@ -110,6 +112,7 @@ bool GlobalFreeList::pop(volatile uint& cellId)
 {
 	if(freeListTail == freeListHead)
 	{
+		cout << "List is empty " << freeListTail << ": " << freeListHead<< endl;
 		return false;
 	}
 
@@ -127,6 +130,7 @@ bool GlobalFreeList::pop(volatile uint& cellId)
 		{
 			//TODO: How if died at this point?
 			cellId = FREEDATA;
+			cout << "List is empty in while " << freeListTail << ": " << localHead << endl;
 			return false;
 		}
 
@@ -154,6 +158,7 @@ bool GlobalFreeList::pop(volatile uint& cellId)
 			if(freeList[localIndex].compare_exchange_strong(oldValue, newValue))
 			{
 				cells[cellIndex].myTid.store(userId);
+				rc = true;
 			}
 
 		}

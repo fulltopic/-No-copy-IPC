@@ -18,7 +18,7 @@ using namespace std;
 enum TIDS
 {
 	FREETID = 0,
-	INVALIDTID = (int)((uint)(0 -1)), //TODO: Replaced by INT_MAX
+	INVALIDTID = INT_MAX,
 	DIRTYTID = (int)(UINT_MAX & (~ (uint)(INT_MAX))),
 	TIDMASK = ~DIRTYTID,
 };

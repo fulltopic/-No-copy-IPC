@@ -18,9 +18,9 @@ using namespace std;
 
 const char* exePathes[] =
 {
-		"/home/zf/workspace_cpp/test_4/bin/test_rcv",
-		"/home/zf/workspace_cpp/test_4/bin/test_snd",
-		"/home/zf/workspace_cpp/test_4/bin/test_snd",
+		"/home/zf/workspace_cpp/test5/bin/test_rcv",
+		"/home/zf/workspace_cpp/test5/bin/test_snd",
+		"/home/zf/workspace_cpp/test5/bin/test_snd",
 //		"/home/zf/workspace_cpp/test_4/bin/test_snd",
 //		"/home/zf/workspace/test_4/bin/",
 };

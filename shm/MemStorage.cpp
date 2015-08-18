@@ -73,9 +73,9 @@ uint MemStorage::getNewTid()
 {
 	uint newTid = tidSeq.fetch_add(1);
 
-	while(newTid == FREETID && newTid == INVALIDTID)
+	while(newTid == FREETID || newTid == INVALIDTID)
 	{
-		newTid = tidSeq.fetch_add(1);
+		newTid = (tidSeq.fetch_add(1)) & TIDMASK;
 	}
 
 	cout << "---------------> For new tid " << newTid << endl;

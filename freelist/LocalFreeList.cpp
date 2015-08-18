@@ -204,7 +204,6 @@ bool LocalFreeList::fetch()
 
 bool LocalFreeList::init(int initBlocks)
 {
-	cout << "Init free list " << initBlocks << " for tid " << myTid << endl;
 
 	if(initBlocks > BLOCKSIZE)
 	{
@@ -212,10 +211,12 @@ bool LocalFreeList::init(int initBlocks)
 	}
 //	initBlocks --;
 	initBlocks = BLOCKSIZE - initBlocks;
+	cout << "Init free list " << initBlocks << " for tid " << myTid << endl;
 
 //	for(int i = initBlocks; i >= 0; i --)
 	for(int i = initBlocks; i < BLOCKSIZE; i ++)
 	{
+		cout << "================================> To allocate 1 block in init " << endl;
 		toAllocCellId = INVALIDCELL;
 
 		if(!MemStorage::GetInstance().alloc(toAllocCellId))

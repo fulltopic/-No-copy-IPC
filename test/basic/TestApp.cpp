@@ -16,8 +16,8 @@ void testSimple()
 
 	thread rt(TestAppInterface::start, &rcver, 2);
 	cout << "create thread receiver " << endl;
-	thread st(TestAppInterface::start, &sender, 3);
-	cout << "create thread sender " << endl;
+//	thread st(TestAppInterface::start, &sender, 3);
+//	cout << "create thread sender " << endl;
 
 //	sleep(1000);
 	getchar();
@@ -27,7 +27,7 @@ void testSimple()
 	rcver.stop();
 
 	cout << "Waiting for join " << endl;
-	st.join();
+//	st.join();
 	rt.join();
 
 	cout << "End of test " << endl;
