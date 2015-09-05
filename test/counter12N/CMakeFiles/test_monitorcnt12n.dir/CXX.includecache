@@ -35,6 +35,8 @@ InitException.h
 /home/zf/workspace_cpp/test5/test/counter12N/InitException.h
 thread
 -
+TestConfig.h
+/home/zf/workspace_cpp/test5/test/counter12N/TestConfig.h
 
 GlobalConfig.h
 climits

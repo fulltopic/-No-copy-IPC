@@ -10,10 +10,19 @@
 
 #include<string>
 
+#define TESTHOME "/home/zf/workspace_cpp/test5/bin/"
+
 enum APPIDS
 {
 	SENDER = 1,
 	RECEIVER = 10,
+};
+
+enum ARGENUMS
+{
+	ARGNUM = 4,
+	PROCARGNUM = 8,
+	PATHLEN = 128,
 };
 
 enum TESTCOUNTER
