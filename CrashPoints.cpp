@@ -27,6 +27,7 @@ bool CrashPoints::Init(bool toCreate)
 
 CrashPoints* CrashPoints::GetInstance()
 {
+	cout << "Return instance " << endl;
 	return instance;
 }
 
