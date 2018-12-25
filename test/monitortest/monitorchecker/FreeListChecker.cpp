@@ -7,7 +7,7 @@
 
 #include "FreeListChecker.h"
 #include <CrashPoints.h>
-#include <MemStorage.h>
+#include <shm/MemStorage.h>
 
 #include <iostream>
 #include <string>

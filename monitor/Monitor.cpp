@@ -6,7 +6,7 @@
  */
 
 #include "Monitor.h"
-#include "MemStorage.h"
+#include "shm/MemStorage.h"
 
 //#ifndef __GXX_EXPERIMENTAL_CXX0X__
 //#define __GXX_EXPERIMENTAL_CXX0X__

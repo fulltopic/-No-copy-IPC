@@ -8,7 +8,7 @@
 #ifndef TESTAPPINTERFACE_H_
 #define TESTAPPINTERFACE_H_
 
-#include <AppProxy.h>
+#include "proxy/AppProxy.h"
 
 class TestAppInterface
 {

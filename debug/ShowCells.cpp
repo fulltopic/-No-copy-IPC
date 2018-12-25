@@ -8,8 +8,8 @@
 
 
 
-#include <ShmStore.h>
-#include <MemStorage.h>
+#include <utils/ShmStore.h>
+#include <shm/MemStorage.h>
 #include <iostream>
 
 using namespace std;

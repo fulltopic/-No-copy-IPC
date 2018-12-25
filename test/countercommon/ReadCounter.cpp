@@ -7,7 +7,7 @@
 
 
 
-#include <ShmStore.h>
+#include <utils/ShmStore.h>
 #include <TestConfig.h>
 #include <iostream>
 #include <string.h>

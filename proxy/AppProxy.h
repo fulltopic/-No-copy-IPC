@@ -10,9 +10,9 @@
 
 //TODO: hide these definition in .h to application user
 
-#include "LocalFreeList.h"
-#include "CmmQueue.h"
-#include "MemStorage.h"
+#include "freelist/LocalFreeList.h"
+#include "comm/CmmQueue.h"
+#include "shm/MemStorage.h"
 #include <map>
 
 using namespace std;

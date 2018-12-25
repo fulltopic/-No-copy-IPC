@@ -8,15 +8,15 @@
 #ifndef MEMSTORAGE_H_
 #define MEMSTORAGE_H_
 
-#include "ShmStore.h"
+#include "utils/ShmStore.h"
 #include "GlobalConfig.h"
 #include "Cell.h"
-#include "CellBlock.h"
-#include "GlobalFreeList.h"
+#include "freelist/CellBlock.h"
+#include "freelist/GlobalFreeList.h"
 #include "CmmQAlocException.h"
-#include "CmmQueue.h"
+#include "comm/CmmQueue.h"
 #include "TransitDataAllocException.h"
-#include "SimpleFreeList.h"
+#include "freelist/SimpleFreeList.h"
 
 #include <sys/types.h>
 

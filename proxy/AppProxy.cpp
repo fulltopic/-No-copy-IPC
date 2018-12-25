@@ -6,7 +6,7 @@
  */
 
 #include "AppProxy.h"
-#include "MemStorage.h"
+#include "shm/MemStorage.h"
 #include "AppProxyInitException.h"
 
 #include <iostream>

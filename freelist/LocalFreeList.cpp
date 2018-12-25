@@ -5,8 +5,8 @@
  *      Author: root
  */
 
-#include "LocalFreeList.h"
-#include "MemStorage.h"
+#include "freelist/LocalFreeList.h"
+#include "shm/MemStorage.h"
 
 #include "CrashPoints.h"
 

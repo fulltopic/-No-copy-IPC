@@ -9,7 +9,7 @@
 #define SHMSTORE_H_
 
 #include <string>
-#include "MemInitException.h"
+#include "shm/MemInitException.h"
 
 using namespace std;
 

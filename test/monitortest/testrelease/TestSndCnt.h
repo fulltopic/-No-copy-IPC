@@ -9,7 +9,7 @@
 #define TESTSNDCNT_H_
 
 #include <TestAppInterface.h>
-#include <ShmStore.h>
+#include <utils/ShmStore.h>
 #include <TestConfig.h>
 
 class TestSndCnt :public TestAppInterface

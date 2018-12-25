@@ -8,7 +8,7 @@
 #ifndef LOCALFREELIST_H_
 #define LOCALFREELIST_H_
 
-#include "Cell.h"
+#include "shm/Cell.h"
 #include "GlobalConfig.h"
 
 class LocalFreeList

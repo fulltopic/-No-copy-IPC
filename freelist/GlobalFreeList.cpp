@@ -5,7 +5,7 @@
  *      Author: root
  */
 
-#include <GlobalConfig.h>
+#include "GlobalConfig.h"
 #include "GlobalFreeList.h"
 #include <time.h>
 #include <string.h>
@@ -13,8 +13,8 @@
 #include <iostream>
 #include <string>
 
-#include "Cell.h"
-#include "MemStorage.h"
+#include "shm/Cell.h"
+#include "shm/MemStorage.h"
 
 
 using namespace std;

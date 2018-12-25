@@ -1,12 +1,12 @@
 
-#include <Monitor.h>
+#include <monitor/Monitor.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
 #include <signal.h>
 #include <iostream>
 #include <sys/wait.h>
-#include "MemStorage.h"
+#include "shm/MemStorage.h"
 
 #include <string.h>
 #include <errno.h>

@@ -6,7 +6,7 @@
  */
 
 #include "CmmQueue.h"
-#include "MemStorage.h"
+#include "shm/MemStorage.h"
 
 #include <string.h>
 

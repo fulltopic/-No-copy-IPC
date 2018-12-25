@@ -1,14 +1,14 @@
 
-#include <Monitor.h>
+#include <monitor/Monitor.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
 #include <signal.h>
 #include <iostream>
 #include <sys/wait.h>
-#include <MemStorage.h>
+#include <shm/MemStorage.h>
 #include <TestConfig.h>
-#include <ShmStore.h>
+#include <utils/ShmStore.h>
 #include <CrashPoints.h>
 
 #include <string.h>

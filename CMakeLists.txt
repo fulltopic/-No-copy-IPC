@@ -2,28 +2,29 @@ cmake_minimum_required(VERSION 2.6)
 
 project(test_5)
 
-set (WORKSPACE /home/zf/workspace_cpp/)
-set (PROJ_HOME ${WORKSPACE}/test5)
-set (PROJ_IDIR ${WORKSPACE}/test5)
-set (BUILD_DIR ${WORKSPACE}/test5_bld)
+set (WORKSPACE /home/zf/workspaces/workspace_cpp/)
+set (PROJ_HOME ${WORKSPACE}/nocpygit/No-copy-IPC/)
+set (PROJ_IDIR ${WORKSPACE}/nocpygit/No-copy-IPC/)
+#set (BUILD_DIR ${WORKSPACE}/test5_bld)
+set (CMAKE_BINARY_DIR ${PROJ_HOME}/build)
+set (CMAKE_CURRENT_BINARY_DIR ${PROJ_HOME}/build/)
 
+#set (comm.DIR ${PROJ_HOME}/comm)
+#set (comm.IDIR ${PROJ_HOME}/comm)
+#set (freelist.DIR ${PROJ_HOME}/freelist)
+#set (freelist.IDIR ${PROJ_HOME}/freelist)
+#set (monitor.DIR ${PROJ_HOME}/monitor)
+#set (monitor.IDIR ${PROJ_HOME}/monitor)
+#set (proxy.DIR ${PROJ_HOME}/proxy)
+#set (proxy.IDIR ${PROJ_HOME}/proxy)
+#set (shm.DIR ${PROJ_HOME}/shm)
+#set (shm.IDIR ${PROJ_HOME}/shm)
+#set (utils.DIR ${PROJ_HOME}/utils)
+#set (utils.IDIR ${PROJ_HOME}/utils)
 
-set (comm.DIR ${PROJ_HOME}/comm)
-set (comm.IDIR ${PROJ_HOME}/comm)
-set (freelist.DIR ${PROJ_HOME}/freelist)
-set (freelist.IDIR ${PROJ_HOME}/freelist)
-set (monitor.DIR ${PROJ_HOME}/monitor)
-set (monitor.IDIR ${PROJ_HOME}/monitor)
-set (proxy.DIR ${PROJ_HOME}/proxy)
-set (proxy.IDIR ${PROJ_HOME}/proxy)
-set (shm.DIR ${PROJ_HOME}/shm)
-set (shm.IDIR ${PROJ_HOME}/shm)
-set (utils.DIR ${PROJ_HOME}/utils)
-set (utils.IDIR ${PROJ_HOME}/utils)
-
-set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJ_HOME}/lib)
-set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJ_HOME}/lib)
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJ_HOME}/bin)
+set (CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_C_COMPILER gcc)
 set(CMAKE_CXX_COMPILER g++)
@@ -34,13 +35,14 @@ set(CMAKE_SHARED_LINKER_FLAGS "-std=c++0x -ggdb -fsigned-char -freg-struct-retur
 
 include_directories(BEFORE
 					${PROJ_IDIR}
-					${comm.IDIR}
-					${freelist.IDIR}
-					${monitor.IDIR}
-					${proxy.IDIR}
-					${shm.IDIR}
-					${utils.IDIR}
 )
+#					${comm.IDIR}
+#					${freelist.IDIR}
+#					${monitor.IDIR}
+#					${proxy.IDIR}
+#					${shm.IDIR}
+#					${utils.IDIR}
+#)
 
 			
 add_subdirectory(comm)
